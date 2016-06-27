@@ -1,0 +1,4 @@
+# ignore Cloud9 folder
+.c9/
+# ignore composer vendor files
+vendor/

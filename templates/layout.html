@@ -1,0 +1,26 @@
+{# Our base layout file so we don't have to repeat ourselves #}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>RPG Connect</title>
+        {# Header block so child templates can add additional content here if needed #}
+        {% block head %} {% endblock %}
+    </head>
+    <body>
+        {% if flashMessages %}
+            <div id="messages">
+                {% for key, messages in flashMessages %}
+                    {# TODO: Iterate thru messages to print all #}
+                    <h1 class={{key}}>{{ messages[0] }}</h1>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div id="content">
+            {# Page content will be rendered in the content block #}
+            {% block content %} {% endblock %}
+        </div>
+    </body>
+</html>
