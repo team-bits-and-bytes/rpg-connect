@@ -14,9 +14,14 @@ require __DIR__ . '/../src/config/dependencies.php';
 // Register middleware
 require __DIR__ . '/../src/config/middleware.php';
 
+// Register models
+require __DIR__ . '/../src/app/models/user.php';
+
 // Register controllers
 require __DIR__ . '/../src/app/controllers/base_controller.php';
 require __DIR__ . '/../src/app/controllers/home_controller.php';
+require __DIR__ . '/../src/app/controllers/users_controller.php';
+require __DIR__ . '/../src/app/controllers/session_controller.php';
 
 // Register routes
 require __DIR__ . '/../src/config/routes.php';

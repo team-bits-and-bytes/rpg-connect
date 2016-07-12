@@ -2,3 +2,5 @@
 .c9/
 # ignore composer vendor files
 vendor/
+# ignore errors log
+php_errors.log

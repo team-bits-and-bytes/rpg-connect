@@ -1,0 +1,15 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <form action={{ path_for('create_user') }} method="POST">
+        <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+        
+        <input type="email" name="email" placeholder="Email">
+        <input type="text" name="name" placeholder="Name">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password_confirm" placeholder="Confirm Password">
+        
+        <button type="submit">Create account</button>
+    </form>
+{% endblock %}
