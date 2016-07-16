@@ -4,7 +4,7 @@ namespace Controllers;
 use Slim\Container;
 use Models\User;
 
-class UsersController extends BaseController {
+class RegistrationController extends BaseController {
     protected $validation_errors;
     
     function __construct(Container $ci) {
@@ -50,7 +50,7 @@ class UsersController extends BaseController {
         $user = new User;
         $user->email = $params['email'];
         $user->name = $params['name'];
-        $user->password = $params['password'];
+        $user->password = password_hash($params['password'], PASSWORD_BCRYPT);
         $user->save();
         
         $_SESSION['auth_user'] = $user->id;

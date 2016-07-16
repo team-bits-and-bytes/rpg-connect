@@ -9,13 +9,4 @@ class User extends Model {
     
     // Hide these fields from the serialized object
     protected $hidden = ['password'];
-    
-    public static function boot() {
-        parent::boot();
-        
-        // Encrypt the password when creating the record
-        static::creating(function($user) {
-            $user->password = password_hash($user->password, PASSWORD_BCRYPT);
-        });
-    }
 }

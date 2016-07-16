@@ -1,0 +1,18 @@
+{% extends "layout.twig" %}
+
+{# This content is rendered under the `content` block in `layout.html` #}
+{% block content %}
+    <form action={{ path_for('edit_user') }} method="POST">
+        <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+        
+        <input type="email" name="email" value="{{ currentUser.email }}">
+        <input type="text" name="name" value="{{ currentUser.name }}">
+        
+        <input type="password" name="password" placeholder="Current Password">
+        <input type="password" name="new_password" placeholder="New Password">
+        <input type="password" name="new_password_confirm" placeholder="Confirm New Password">
+        
+        <button type="submit">Edit</button>
+    </form>
+{% endblock %}

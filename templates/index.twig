@@ -7,9 +7,10 @@
         <h1>You're logged in, {{currentUser.name}}</h1>
     {% endif %}
     {% if currentUser %}
-        <a href="/logout">Logout</a>
+        <a href="{{ path_for("user") }}">Profile</a>
+        <a href="{{ path_for("logout") }}">Logout</a>
     {% else %}
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
+        <a href="{{ path_for("register") }}">Register</a>
+        <a href="{{ path_for("login") }}">Login</a>
     {% endif %}
 {% endblock %}
