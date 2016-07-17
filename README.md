@@ -1,5 +1,17 @@
 # RPG Connect
 
+## Getting up and running
+
+### Database
+
+You can set up the database by running the following:
+
+`php tasks.php migrate`
+
+You can rollback changes made by running the following:
+
+`php tasks.php rollback`
+
 ## Structure
 
 TODO

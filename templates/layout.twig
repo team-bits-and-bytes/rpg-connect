@@ -5,10 +5,14 @@
     <head>
         <meta charset="utf-8"/>
         <title>RPG Connect</title>
+        <link rel="stylesheet" href="/assets/css/app.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
         {# Header block so child templates can add additional content here if needed #}
         {% block head %} {% endblock %}
     </head>
     <body>
+        {# Flash messages displayed here #}
         {% if flashMessages %}
             <div id="messages">
                 {% for key, messages in flashMessages %}
@@ -18,6 +22,7 @@
             </div>
         {% endif %}
         
+        {# Individual page content is rendered below #}
         <div id="content">
             {# Page content will be rendered in the content block #}
             {% block content %} {% endblock %}

@@ -26,6 +26,11 @@ class Tasks {
     
     private function migrations($rollback) {
         $files = glob(__DIR__ . '/src/db/migrations/*.php');
+        // reverse the order if we are rolling back
+        if ($rollback == true) {
+            $files = array_reverse($files);
+        }
+        
         foreach ($files as $file) {
             require_once $file;
             $class = basename($file, '.php');

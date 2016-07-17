@@ -29,6 +29,11 @@ class UserController extends BaseController {
         if (password_verify($params['password'], $user->password)) {
             $user->email = $params['email'];
             $user->name = $params['name'];
+            $user->avatar = $params['avatar'];
+            $user->location = $params['location'];
+            $user->website = $params['website'];
+            $user->about = $params['about'];
+            
             // new password set?
             if ($params['new_password'] != null) {
                 if ($params['new_password'] == $params['new_password_confirm']) {

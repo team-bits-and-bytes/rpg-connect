@@ -1,18 +1,33 @@
 {% extends "layout.twig" %}
 
+{% block head %}
+    <script src="/assets/js/avatar-upload.js"></script>
+{% endblock %}
+
 {# This content is rendered under the `content` block in `layout.html` #}
 {% block content %}
+    {# The avatar input is outside the form because we convert the image to a data-uri format
+       via JavaScript. #}
+    <img src="{{ currentUser.avatar }}">
+    <input id="avatar_upload" type="file" name="avatar_upload">
+            
     <form action={{ path_for('edit_user') }} method="POST">
         <input type="hidden" name="csrf_name" value={{ csrf_name }}>
         <input type="hidden" name="csrf_value" value={{ csrf_value }}>
         
+        {# Hidden field as we store the data-uri string for the avatar here #}
+        <input type="hidden" name="avatar" value="{{ currentUser. avatar }}">
+        
         <input type="email" name="email" value="{{ currentUser.email }}">
         <input type="text" name="name" value="{{ currentUser.name }}">
+        <input type="text" name="location" value="{{ currentUser.location }}" placeholder="Location">
+        <input type="url" name="website" value="{{ currentUser.website }}" placeholder="Website">
+        <textarea name="about" placeholder="About" maxlength="255">{{ currentUser.about }}</textarea>
         
         <input type="password" name="password" placeholder="Current Password">
         <input type="password" name="new_password" placeholder="New Password">
         <input type="password" name="new_password_confirm" placeholder="Confirm New Password">
         
-        <button type="submit">Edit</button>
+        <button type="submit">Update</button>
     </form>
 {% endblock %}
