@@ -37,7 +37,7 @@ class UserController extends BaseController {
             // new password set?
             if ($params['new_password'] != null) {
                 if ($params['new_password'] == $params['new_password_confirm']) {
-                    $user->password = password_hash($params['new_password'], PASSWORD_BCRYPT);
+                    $user->password = $params['new_password'];
                 } else {
                     $this->flash->addMessage('error', 'New passwords do not match.');
                     return $response->withRedirect($this->ci->get('router')->pathFor('user'));

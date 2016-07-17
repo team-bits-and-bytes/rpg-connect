@@ -50,7 +50,7 @@ class RegistrationController extends BaseController {
         $user = new User;
         $user->email = $params['email'];
         $user->name = $params['name'];
-        $user->password = password_hash($params['password'], PASSWORD_BCRYPT);
+        $user->password = $params['password'];
         $user->save();
         
         $_SESSION['auth_user'] = $user->id;
