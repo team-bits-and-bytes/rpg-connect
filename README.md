@@ -1,5 +1,9 @@
 # RPG Connect
 
+## Structure
+
+TODO
+
 ## Links
 
 - [Cloud9](https://ide.c9.io/sstenhouse/team_bits_bytes)

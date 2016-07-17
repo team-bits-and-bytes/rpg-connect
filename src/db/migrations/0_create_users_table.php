@@ -1,5 +1,4 @@
 <?php
-require __DIR__ . '/../database_base.php';
 
 class CreateUsersTable extends DatabaseBase {
     public function up() {
