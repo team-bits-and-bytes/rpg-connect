@@ -17,7 +17,13 @@ class SessionController extends BaseController {
     
     // POST '/login'
     public function create($request, $response) {
-        $user = User::where('email', $request->getParam('email'))->first();
+        $user = null;
+        if (strpos($request->getParam('email'), '@') !== false) {
+            $user = User::where('email', $request->getParam('email'))->first();
+        } else {
+            $user = User::where('username', $request->getParam('email'))->first();
+        }
+        
         if (is_null($user)) {
             $this->flash->addMessage('error', 'The credentials you passed were invalid.');
             return $response->withRedirect($this->ci->get('router')->pathFor('login'));

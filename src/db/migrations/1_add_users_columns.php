@@ -7,6 +7,7 @@ class AddUsersColumns extends DatabaseBase {
         }
         
         $this->schema->table('users', function($table) {
+            $table->string('username')->unique();
             $table->text('avatar')->nullable();
             $table->string('location')->nullable();
             $table->string('website')->nullable();
@@ -20,6 +21,7 @@ class AddUsersColumns extends DatabaseBase {
         }
         
         $this->schema->table('users', function($table) {
+            $table->dropColumn('username');
             $table->dropColumn('avatar');
             $table->dropColumn('location');
             $table->dropColumn('website');

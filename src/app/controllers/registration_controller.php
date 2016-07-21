@@ -5,7 +5,7 @@ use Slim\Container;
 use Models\User;
 
 class RegistrationController extends BaseController {
-    protected $validation_errors;
+    protected $validation_error;
     
     function __construct(Container $ci) {
         parent::__construct($ci);
@@ -20,10 +20,6 @@ class RegistrationController extends BaseController {
             $this->flash->addMessage('info', 'You are already logged in.');
             return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
-        
-        $name = $request->getAttribute('csrf_name');
-        $value = $request->getAttribute('csrf_value');
-        $messages = $this->flash->getMessages();
         
         return $this->renderer->render($response, 'register.twig', $this->locals($request));
     }
@@ -48,6 +44,7 @@ class RegistrationController extends BaseController {
         }
         
         $user = new User;
+        $user->username = $params['username'];
         $user->email = $params['email'];
         $user->name = $params['name'];
         $user->password = $params['password'];
@@ -59,6 +56,14 @@ class RegistrationController extends BaseController {
     
     // User model validations
     private function validate($params) {
+        // unique constraint on username
+        $count = User::where('username', $params['username'])->count();
+        if ($count != 0) {
+            $this->is_invalid = true;
+            $this->validation_error ='Username already exists.';
+            return false;
+        }
+        
         // unique constraint on email
         $count = User::where('email', $params['email'])->count();
         if ($count != 0) {
