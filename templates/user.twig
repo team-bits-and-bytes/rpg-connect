@@ -8,7 +8,7 @@
 {% block content %}
     {# The avatar input is outside the form because we convert the image to a data-uri format
        via JavaScript. #}
-    <img src="{{ currentUser.avatar }}">
+    <img id="current_avatar" src="{{ currentUser.avatar }}">
     <input id="avatar_upload" type="file" name="avatar_upload">
             
     <form action={{ path_for('edit_user') }} method="POST">

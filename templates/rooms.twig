@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <h1>Create a new Chatroom</h1>
+    <form action="{{ path_for("create_room") }}" method="POST">
+        <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+        
+        <input type="text" name="name" placeholder="Chatroom name">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password_confirm" placeholder="Confirm Password">
+        
+        <button type="submit">Create</button>
+    </form>
+    
+    {# List of rooms the user owns #}
+    <ul>
+        {% for room in currentUser.rooms %}
+            <li style="margin-bottom: 10px;">
+                Name: {{room.name}}
+                <br>
+                Owner: {{room.owner.name}}
+                <br>
+                Private: {{room.private ? 'Yes' : 'No' }}
+                <br>
+                Members: {{room.members.count}}
+            </li>
+        {% endfor %}
+    </ul>
+    
+    {# Search #}
+    <form action="{{ path_for("search_rooms") }}" method="GET">
+        <input type="text" name="query" placeholder="Search">
+        <button type="submit">Search</button>
+    </form>
+{% endblock %}

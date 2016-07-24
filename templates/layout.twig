@@ -16,8 +16,9 @@
         {% if flashMessages %}
             <div id="messages">
                 {% for key, messages in flashMessages %}
-                    {# TODO: Iterate thru messages to print all #}
-                    <h1 class={{key}}>{{ messages[0] }}</h1>
+                    {% for message in messages %}
+                        <h1 class={{key}}>{{ message }}</h1>
+                    {% endfor %}
                 {% endfor %}
             </div>
         {% endif %}
