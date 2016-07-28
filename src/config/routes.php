@@ -21,3 +21,4 @@ $app->post('/rooms/join', 'Controllers\RoomController:join')->setName('join_room
 
 // Misc
 $app->get('/about', 'Controllers\PageController:about')->setName('about');
+$app->get('/help', 'Controllers\PageController:help')->setName('help');
