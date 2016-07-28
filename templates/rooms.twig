@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block content %}
+{% block body %}
     <h1>Create a new Chatroom</h1>
     <form action="{{ path_for("create_room") }}" method="POST">
         <input type="hidden" name="csrf_name" value={{ csrf_name }}>

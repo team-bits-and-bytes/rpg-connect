@@ -5,7 +5,7 @@
 {% endblock %}
 
 {# This content is rendered under the `content` block in `layout.html` #}
-{% block content %}
+{% block body %}
     {# The avatar input is outside the form because we convert the image to a data-uri format
        via JavaScript. #}
     <img id="current_avatar" src="{{ currentUser.avatar }}">

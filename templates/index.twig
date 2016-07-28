@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {# This content is rendered under the `content` block in `layout.html` #}
-{% block content %}
+{% block body %}
     <img src="images/logo.jpg" alt="RPG Connect"/>
     {% if currentUser %}
         <h1>You're logged in, {{currentUser.name}}</h1>

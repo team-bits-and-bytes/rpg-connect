@@ -26,6 +26,7 @@ require __DIR__ . '/../src/app/controllers/registration_controller.php';
 require __DIR__ . '/../src/app/controllers/session_controller.php';
 require __DIR__ . '/../src/app/controllers/user_controller.php';
 require __DIR__ . '/../src/app/controllers/room_controller.php';
+require __DIR__ . '/../src/app/controllers/page_controller.php';
 
 // Register routes
 require __DIR__ . '/../src/config/routes.php';

@@ -27,6 +27,7 @@ class UserController extends BaseController {
         // update the attributes
         $user = $this->current_user();
         if (password_verify($params['password'], $user->password)) {
+            // TODO: Don't set unchanged properties...
             $user->email = $params['email'];
             $user->name = $params['name'];
             $user->avatar = $params['avatar'];

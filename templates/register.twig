@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block content %}
+{% block body %}
     <form action={{ path_for('create_user') }} method="POST">
         <input type="hidden" name="csrf_name" value={{ csrf_name }}>
         <input type="hidden" name="csrf_value" value={{ csrf_value }}>
