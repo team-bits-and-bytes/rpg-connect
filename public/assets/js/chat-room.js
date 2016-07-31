@@ -46,6 +46,30 @@ $(document).ready(function() {
             $('input[name="csrf_value"]').val(response.value);
         });
     }
+    
+    var getMessages = function(callback) {
+        var url = window.location.pathname + '/messages';
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: { 'message_id': LAST_MESSAGE_ID }
+        }).done(function(response) {
+            if (response.length === 0) {
+                return;
+            }
+            
+            // get last message in response array and update LAST_MESSAGE_ID
+            LAST_MESSAGE_ID = response[response.length - 1]['message_id'];
+            $.each(response, function(_, message) {
+               createMessage(message);
+            });
+            
+            // execute callback if it exists!
+            if (callback !== undefined || callback !== null) {
+                callback();
+            }
+        });
+    }
    
     // sending a new message
     $('.messages .new form').on('submit', function(e) {
@@ -67,23 +91,15 @@ $(document).ready(function() {
         $(this).find('input[type="text"]')[0].value = '';
     });
     
-    // constantly request new info from the server!
-    setInterval(function() {
-        var url = window.location.pathname + '/messages';
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: { 'message_id': LAST_MESSAGE_ID }
-        }).done(function(response) {
-            if (response.length === 0) {
-                return;
-            }
-            
-            // get last message in response array and update LAST_MESSAGE_ID
-            LAST_MESSAGE_ID = response[response.length - 1]['message_id'];
-            $.each(response, function(_, message) {
-               createMessage(message);
-            });
-        });
-    }, 1000); // every 1s
+    // request old messages instantly
+    getMessages(function() {
+        // constantly request new info from the server!
+        setInterval(function() {
+            getMessages();
+        }, 2000); // every 2s
+    });
+    
+    // expose `sendMessage` as a global so other JavaScript files may use it
+    window.rpgc = window.rpgc || {};
+    window.rpgc.sendMessage = sendMessage;
 });
