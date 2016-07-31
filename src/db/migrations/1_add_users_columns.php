@@ -6,6 +6,14 @@ class AddUsersColumns extends DatabaseBase {
             return;
         }
         
+        if ($this->schema->hasColumn('users', 'username') &&
+            $this->schema->hasColumn('users', 'avatar') &&
+            $this->schema->hasColumn('users', 'location') &&
+            $this->schema->hasColumn('users', 'website') &&
+            $this->schema->hasColumn('users', 'about')) {
+                return;
+            }
+        
         $this->schema->table('users', function($table) {
             $table->string('username')->unique();
             $table->text('avatar')->nullable();

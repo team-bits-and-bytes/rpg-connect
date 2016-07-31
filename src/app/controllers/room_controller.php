@@ -40,11 +40,7 @@ class RoomController extends BaseController {
     // DELETE '/rooms/{id}/delete'
     public function delete($request, $response, $args) {
         $room = Room::where('id', $args['id'])->first();
-        if (is_null($room)) {
-            $this->flash->addMessage('error', 'Room does not exist.');
-            return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
-        }
-        
+
         // error if the signed in user is not the owner of the room
         if ($this->current_user() != $room->owner) {
             $this->flash->addMessage('error', 'You are not the owner of this room.');
@@ -83,11 +79,18 @@ class RoomController extends BaseController {
     // POST '/rooms/{id}/join'
     public function join($request, $response, $args) {
         $room = Room::where('id', $args['id'])->first();
-        if (is_null($request->getParam('password')) == false) {
-            // confirm that the password is correct
-            $result = password_verify($request->getParam('password'), $room->password);
-            if ($result == false) {
-                $this->flash->addMessage('error', 'Incorrect password.');
+
+        // if the room is private, check for a valid password
+        if (is_null($room->password) == false) {
+            if (is_null($request->getParam('password')) == false) {
+                // confirm that the password is correct
+                $result = password_verify($request->getParam('password'), $room->password);
+                if ($result == false) {
+                    $this->flash->addMessage('error', 'Incorrect password.');
+                    return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+                }
+            } else {
+                $this->flash->addMessage('error', 'You must provide a password!');
                 return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
             }
         }
@@ -97,6 +100,24 @@ class RoomController extends BaseController {
         ]);
         
         $this->flash->addMessage('success', 'You joined room ' . $room->name . '!');
+        return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+    }
+    
+    // POST '/rooms/{id}/favourite'
+    public function favourite($request, $response, $args) {
+        $member = Member::where('room_id', $args['id'])
+            ->where('user_id', $this->current_user()->id)
+            ->first();
+        if (is_null($member)) {
+            $this->flash->addMessage('error', 'You are not a member of this room.');
+            return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+        }
+        
+        $member->favourite = $request->getParam('favourite') == 'true' ? true : false;
+        $member->save();
+        
+        $message = 'You ' . ($member->favourite ? 'favourited' : 'unfavourited') . ' ' . $member->room()->first()->name . '.';
+        $this->flash->addMessage('success', $message);
         return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
     }
     

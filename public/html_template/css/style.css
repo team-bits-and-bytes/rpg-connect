@@ -82,8 +82,16 @@ p{
 	width: 33.33%;
 }
 
-.thirdCol img{
+[class*='Col'] img{
 	width: 100%;
+}
+
+[class*='Col'] textarea{
+	width: 100%;
+}
+
+[class*='Col'] button, [class*='Col'] input[type=submit]{
+	margin-top: 20px;
 }
 
 .thirdCol h1{
@@ -115,6 +123,31 @@ p{
 	color: black;
 }
 
+.twofourthsCol{
+	width: 50%;
+}
+
+	overflow-y: scroll;
+	height: 246px;
+}
+
+.newfeatures::-webkit-scrollbar{
+	width:1em;
+	background-color: #424B54;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.oneCol{
+	width: 100%;
+}
 
 .grid:after {
   content: "";
@@ -150,7 +183,6 @@ p{
 .hiddenCol{
 	width: auto;
 	border-radius: 10px;
-	padding: 1.5em;
 }
 
 .inside {
@@ -161,11 +193,20 @@ p{
 	text-align: center;
 }
 
+#buttonwrap{
+	display: inline;
+	float: left;
+	text-align: center;
+}
 
+#contactbtn{
+	height:60px;
+}
 
 #newfeatures{
 	overflow-y: scroll;
-	height: 390px;
+	height: 246px;
+	padding-right: 20px;
 }
 
 #newfeatures::-webkit-scrollbar{
@@ -173,11 +214,30 @@ p{
 	background-color: #424B54;
 }
 
-body::-webkit-scrollbar-track {
+#newfeatures::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-body::-webkit-scrollbar-thumb {
+#newfeatures::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.twofourthsCol texarea{
+	overflow-y: scroll;
+	height: 246px;
+}
+	
+.twofourthsCol texarea::-webkit-scrollbar{
+	width:1em;
+	background-color: #424B54;
+}
+
+.twofourthsCol texarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.twofourthsCol texarea::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
@@ -329,6 +389,7 @@ footer p {
     background: rgba(black, .08);
     border-radius: 4px;
   }
+  
 input[type=text], input[type=password] { width: 278px; }
 
   p.loginrem {
@@ -394,4 +455,16 @@ input[type=submit] {
 
 .lt-ie9 {
   input[type=text], input[type=password] { line-height: 34px; }
+}
+
+/* NOTEBOOK */ 
+
+.notebookTextarea {
+	  background-color: #F7F3E3;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 1.3em;
+    padding: 20px;
+    content: "Heya";
 }

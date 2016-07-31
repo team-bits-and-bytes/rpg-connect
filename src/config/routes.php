@@ -18,6 +18,7 @@ $app->post('/rooms', 'Controllers\RoomController:create')->setName('create_room'
 $app->map(['POST', 'DELETE'], '/rooms/{id}/delete', 'Controllers\RoomController:delete')->setName('delete_room');
 $app->get('/rooms/search', 'Controllers\RoomController:search')->setName('search_rooms');
 $app->post('/rooms/{id}/join', 'Controllers\RoomController:join')->setName('join_room');
+$app->post('/rooms/{id}/favourite', 'Controllers\RoomController:favourite')->setName('favourite_room');
 
 // Misc
 $app->get('/about', 'Controllers\PageController:about')->setName('about');

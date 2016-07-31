@@ -25,6 +25,14 @@
                 <br>
                 Members: {{room.members.count}}
                 <br>
+                <form action={{ path_for("favourite_room", { 'id': room.id }) }} method="POST">
+                    <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+                    <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                    <input type="hidden" name="favourite" value={{ room.is_favourite ? "false" : "true" }}>
+                    <button type="submit">
+                        {{ room.is_favourite ? "Unfavourite" : "Favourite" }}
+                    </button>
+                </form>
                 {% if currentUser == room.owner %}
                     <form action={{ path_for("delete_room", { 'id': room.id }) }} method="POST">
                         <input type="hidden" name="csrf_name" value={{ csrf_name }}>

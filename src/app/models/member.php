@@ -12,6 +12,9 @@ class Member extends Model {
     
     // Allow mass assignment on these attributes
     protected $fillable = ['user_id'];
+    
+    // Cast these attributes into this type
+    protected $casts = ['favourite' => 'boolean'];
 
     public function user() {
         return $this->belongsTo('Models\User');

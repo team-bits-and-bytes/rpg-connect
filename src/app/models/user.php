@@ -16,6 +16,7 @@ class User extends Model {
     public function getRoomsAttribute() {
         return Member::where('user_id', $this->attributes['id'])
             ->with('room')
+            ->orderBy('favourite', 'desc')
             ->get()
             ->map(function($item) {
                 return $item->room;
