@@ -20,6 +20,8 @@ $app->get('/rooms/search', 'Controllers\RoomController:search')->setName('search
 $app->post('/rooms/{id}/join', 'Controllers\RoomController:join')->setName('join_room');
 $app->post('/rooms/{id}/favourite', 'Controllers\RoomController:favourite')->setName('favourite_room');
 $app->get('/rooms/{id}', 'Controllers\RoomController:show')->setName('room');
+$app->post('/rooms/{id}/message', 'Controllers\RoomController:message');
+$app->get('/rooms/{id}/messages', 'Controllers\RoomController:messages');
 
 // Misc
 $app->get('/about', 'Controllers\PageController:about')->setName('about');

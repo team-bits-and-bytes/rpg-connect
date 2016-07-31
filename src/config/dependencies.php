@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/../lib/redis_extensions.php';
+
 use \Illuminate\Database\Capsule\Manager as Capsule;
 use \Illuminate\Events\Dispatcher;
 use \Illuminate\Container\Container;
@@ -38,6 +40,19 @@ $container['database'] = function($container) {
 // flash messages
 $container['flash'] = function() {
     return new \Slim\Flash\Messages();
+};
+
+// Redis
+$container['redis'] = function($container) {
+    $client = new \Predis\Client([
+        'scheme' => 'tcp',
+        'host' => $container->get('settings')['redis']['host'],
+        'port' => $container->get('settings')['redis']['port']
+    ]);
+    $profile = $client->getProfile();
+    $profile->defineCommand('jsonset', 'RedisSerialization');
+    $profile->defineCommand('jsonget', 'RedisDeserialization');
+    return $client;
 };
 
 /*

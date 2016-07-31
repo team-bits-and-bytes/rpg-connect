@@ -1,9 +1,65 @@
 {% extends "layout.twig" %}
 
 {% block head %}
-
+    <script src="/assets/js/chat-room.js"></script>
+    <style>
+        .messages {
+            width: 100%;
+            height: 100%;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 10px;
+        }
+        
+        .messages .new {
+            height: 50px;
+            width: 100%;
+        }
+        
+        .messages .new form {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .messages .new input {
+            height: 100%;
+            width: 89%;
+            padding-left: 10px;
+        }
+        
+        .messages .new button {
+            display: inline;
+            height: 100%;
+            width: 10%;
+            border-radius: 0;
+            margin: 0;
+        }
+        
+        .message {
+            padding-bottom: 10px;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
-
+    <div class="messages">
+        <ul>
+            {# messages added here by javascript #}
+        </ul>
+        
+        <div class="new">
+            <form>
+                <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+                <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                
+                <input type="hidden" name="user_id" value={{ currentUser.id }} />
+                <input type="hidden" name="user_name" value={{ currentUser.name }} />
+                <input type="text" name="message" placeholder="What's up..." />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

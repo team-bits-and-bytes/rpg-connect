@@ -15,6 +15,10 @@ return [
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => ''
+        ],
+        'redis' => [
+            'host' => getenv('IP'),
+            'port' => 6379    
         ]
     ],
 ];

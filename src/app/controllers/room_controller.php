@@ -4,6 +4,7 @@ namespace Controllers;
 use Slim\Container;
 use Models\Room;
 use Models\Member;
+use Lib\Cache;
 
 class RoomController extends BaseController {
     protected $validation_error;
@@ -47,6 +48,10 @@ class RoomController extends BaseController {
             return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
         }
         
+        // detele messages
+        $cache_key = $room->id . '_messages';
+        $this->ci->get('redis')->jsonset($cache_key, null);
+        
         // delete member records!
         $members = $room->members();
         $members->each(function($member) {
@@ -81,7 +86,7 @@ class RoomController extends BaseController {
         $room = Room::where('id', $args['id'])->first();
 
         // if the room is private, check for a valid password
-        if (is_null($room->password) == false) {
+        if ($room->private == true) {
             if (is_null($request->getParam('password')) == false) {
                 // confirm that the password is correct
                 $result = password_verify($request->getParam('password'), $room->password);
@@ -137,6 +142,72 @@ class RoomController extends BaseController {
         $locals = array_merge([
         ], $this->locals($request));    
         return $this->renderer->render($response, 'rooms/chat.twig', $locals);
+    }
+    
+    // POST '/rooms/{id}/message'
+    public function message($request, $response, $args) {
+        $cache_key = $args['id'] . '_messages';
+        $data = $request->getParams();
+        
+        // clean up the csrf values from the form
+        unset($data['csrf_name']);
+        unset($data['csrf_value']);
+
+        $messages = $this->ci->get('redis')->jsonget($cache_key);
+        
+        // set the message id
+        $msg_id = is_null($messages) ? 1 : count($messages) + 1;
+        $data = array_merge([ 'message_id' => $msg_id ], $data);
+        
+        // if we already have messages for this CACHE_KEY, then push onto
+        // the stack
+        if (is_null($messages) == false) {
+            array_push($messages, $data);
+            $data = $messages;
+            $this->ci->get('redis')->jsonset($cache_key, $data);
+        } else {
+            $this->ci->get('redis')->jsonset($cache_key, [$data]);
+        }
+        
+        // TODO: Set expiry on key? How long?
+        
+        // CSRF is reset after a POST request, so send down new details
+        $name = $request->getAttribute('csrf_name');
+        $value = $request->getAttribute('csrf_value');
+        return $response->withJson([ 'name' => $name, 'value' => $value ], 201);
+    }
+    
+    // GET '/rooms/{id}/messages'
+    public function messages($request, $response, $args) {
+        // return nothing if not logged in
+        if ($this->current_user() == null) {
+            return $response->withJson([], 200);
+        }
+        
+        // Return nothing if the user is not a member
+        $room = Room::where('id', $args['id'])->first();
+        if ($room->is_member == false) {
+            return $response->withJson([], 200);
+        }
+        
+        $cache_key = $room->id . '_messages';
+        $data = $this->ci->get('redis')->jsonget($cache_key);
+        if (is_null($data)) {
+            $data = [];
+        } else {
+            // filter data to only include messages after the requested id.
+            $id = $request->getParam('message_id');
+            if (is_null($id) == false) {
+                $filtered = [];
+                foreach ($data as $message) {
+                    if ($message->message_id > $id) {
+                        array_push($filtered, $message);
+                    }
+                }
+                $data = $filtered;
+            }
+        }
+        return $response->withJson($data, 200);
     }
     
     private function createRoom($params) {

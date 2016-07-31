@@ -31,7 +31,7 @@ class User extends Model {
     // Return the default avatar if no avatar exists
     public function getAvatarAttribute($value) {
         if ($value == null) {
-            return '/images/dice20.png';
+            return '/images/profile.png';
         } else {
             return $value;
         }

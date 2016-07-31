@@ -26,7 +26,7 @@
                 Members: {{room.members.count}}
                 <br>
                 
-                <form action={{ path_for("room", { 'id': room.id }) }} style="display: inline;">
+                <form action={{ path_for("room", { 'id': room.id }) }} method="GET" style="display: inline;">
                     <button type="submit">Open</button>
                 </form>
                 
