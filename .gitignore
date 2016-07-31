@@ -4,3 +4,5 @@
 vendor/
 # ignore errors log
 php_errors.log
+# ignore html templates
+public/html_template/*

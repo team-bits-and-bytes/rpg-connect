@@ -9,7 +9,7 @@ class UserController extends BaseController {
             return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
         
-        return $this->renderer->render($response, 'user.twig', $this->locals($request));
+        return $this->renderer->render($response, 'profile.twig', $this->locals($request));
     }
     
     public function update($request, $response) {

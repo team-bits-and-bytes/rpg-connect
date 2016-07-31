@@ -73,7 +73,7 @@ class RoomController extends BaseController {
             'rooms' => $rooms
         ], $this->locals($request));
         
-        return $this->renderer->render($response, 'search.twig', $locals);
+        return $this->renderer->render($response, 'rooms/search.twig', $locals);
     }
     
     // POST '/rooms/{id}/join'
@@ -119,6 +119,24 @@ class RoomController extends BaseController {
         $message = 'You ' . ($member->favourite ? 'favourited' : 'unfavourited') . ' ' . $member->room()->first()->name . '.';
         $this->flash->addMessage('success', $message);
         return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+    }
+    
+    // GET '/rooms/{id}'
+    public function show($request, $response, $args) {
+        // redirect if the user isn't authenticated
+        if ($this->current_user() == null) {
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
+        }
+        
+        $room = Room::where('id', $args['id'])->first();
+        if (is_null($room)) {
+            $this->flash->addMessage('error', 'Room does not exist.');
+            return $resposne->withRedirect($this->ci->get('router')->pathFor('rooms'));
+        }
+        
+        $locals = array_merge([
+        ], $this->locals($request));    
+        return $this->renderer->render($response, 'rooms/chat.twig', $locals);
     }
     
     private function createRoom($params) {
