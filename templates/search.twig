@@ -1,5 +1,9 @@
 {% extends "layout.twig" %}
 
+{% block head %}
+    <script src="/assets/js/join-room.js"></script>
+{% endblock %}
+
 {% block body %}
     <h1>Rooms Found</h1>
     <ul>
@@ -8,11 +12,10 @@
                 Name: {{room.name}}
                 <br>
                 {% if not room.is_member %}
-                    <form action="{{ path_for("join_room") }}" method="POST">
+                    <form id="join_room" action="{{ path_for("join_room", { 'id': room.id }) }}" method="POST" data-private={{ room.private }}>
                         <input type="hidden" name="csrf_name" value={{ csrf_name }}>
                         <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-        
-                        <input type="hidden" name="room" value={{ room.id }}>
+                        <input type="hidden" name="password">
                         <button type="submit">Join</button>
                     </form>
                 {% endif %}

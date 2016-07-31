@@ -5,16 +5,6 @@ namespace Controllers;
 use Models\User;
 
 class SessionController extends BaseController {
-    // GET '/login'
-    public function index($request, $response) {
-        // redirect if the user is already authenticated
-        if ($this->current_user() != null) {
-            $this->flash->addMessage('info', 'You are already logged in.');
-            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
-        }
-        return $this->renderer->render($response, 'login.twig', $this->locals($request));
-    }
-    
     // POST '/login'
     public function create($request, $response) {
         $user = null;
@@ -26,7 +16,7 @@ class SessionController extends BaseController {
         
         if (is_null($user)) {
             $this->flash->addMessage('error', 'The credentials you passed were invalid.');
-            return $response->withRedirect($this->ci->get('router')->pathFor('login'));
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
         
         // verify that the password hashes match
@@ -36,7 +26,7 @@ class SessionController extends BaseController {
             return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         } else {
             $this->flash->addMessage('error', 'The credentials you passed were invalid.');
-            return $response->withRedirect($this->ci->get('router')->pathFor('login'));
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
     }
     

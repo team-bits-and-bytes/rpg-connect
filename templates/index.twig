@@ -2,16 +2,9 @@
 
 {# This content is rendered under the `content` block in `layout.html` #}
 {% block body %}
-    <img src="images/logo.jpg" alt="RPG Connect"/>
     {% if currentUser %}
-        <h1>You're logged in, {{currentUser.name}}</h1>
-    {% endif %}
-    {% if currentUser %}
-        <a href="{{ path_for("rooms") }}">Rooms</a>
-        <a href="{{ path_for("user") }}">Profile</a>
-        <a href="{{ path_for("logout") }}">Logout</a>
+        {% include "partials/dashboard.twig" %}
     {% else %}
-        <a href="{{ path_for("register") }}">Register</a>
-        <a href="{{ path_for("login") }}">Login</a>
+        {% include "partials/home.twig" %}
     {% endif %}
 {% endblock %}

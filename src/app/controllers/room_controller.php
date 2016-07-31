@@ -18,7 +18,7 @@ class RoomController extends BaseController {
     public function index($request, $response) {
         // redirect if the user isn't authenticated
         if ($this->current_user() == null) {
-            return $response->withRedirect($this->ci->get('router')->pathFor('login'));
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
         return $this->renderer->render($response, 'rooms.twig', $this->locals($request));
     }
@@ -36,17 +36,42 @@ class RoomController extends BaseController {
         return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
     }
     
+    // POST '/rooms/{id}/delete'
+    // DELETE '/rooms/{id}/delete'
+    public function delete($request, $response, $args) {
+        $room = Room::where('id', $args['id'])->first();
+        if (is_null($room)) {
+            $this->flash->addMessage('error', 'Room does not exist.');
+            return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+        }
+        
+        // error if the signed in user is not the owner of the room
+        if ($this->current_user() != $room->owner) {
+            $this->flash->addMessage('error', 'You are not the owner of this room.');
+            return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+        }
+        
+        // delete member records!
+        $members = $room->members();
+        $members->each(function($member) {
+            $member->delete();    
+        });
+        
+        // delete room
+        $room->delete();
+        $this->flash->addMessage('success', 'Room was successfully deleted.');
+        return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+    }
+    
     // GET '/rooms/search'
     public function search($request, $response) {
         // redirect if the user isn't authenticated
         if ($this->current_user() == null) {
-            return $response->withRedirect($this->ci->get('router')->pathFor('login'));
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
         
         $query = '%' . $request->getParam('query') . '%';
-        $rooms = Room::where('name', 'like', $query)
-            ->where('password', null) // private rooms
-            ->get();
+        $rooms = Room::where('name', 'like', $query)->get();
         
         $locals = array_merge([
             'rooms' => $rooms
@@ -55,11 +80,20 @@ class RoomController extends BaseController {
         return $this->renderer->render($response, 'search.twig', $locals);
     }
     
-    // POST '/rooms/join'
-    public function join($request, $response) {
-        $room = Room::where('id', $request->getParam('room'))->first();
+    // POST '/rooms/{id}/join'
+    public function join($request, $response, $args) {
+        $room = Room::where('id', $args['id'])->first();
+        if (is_null($request->getParam('password')) == false) {
+            // confirm that the password is correct
+            $result = password_verify($request->getParam('password'), $room->password);
+            if ($result == false) {
+                $this->flash->addMessage('error', 'Incorrect password.');
+                return $response->withRedirect($this->ci->get('router')->pathFor('rooms'));
+            }
+        }
+        
         $room->members()->create([
-            'user_id' => $this->current_user()->id    
+            'user_id' => $this->current_user()->id
         ]);
         
         $this->flash->addMessage('success', 'You joined room ' . $room->name . '!');

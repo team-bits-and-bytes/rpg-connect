@@ -5,13 +5,17 @@
     <head>
         <meta charset="utf-8"/>
         <title>RPG Connect</title>
-        <link rel="stylesheet" href="/assets/css/app.css">
+        <link href='https://fonts.googleapis.com/css?family=Dosis:300,400,600,800|Roboto:400,500,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/assets/css/style.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         
         {# Header block so child templates can add additional content here if needed #}
         {% block head %} {% endblock %}
     </head>
     <body>
+        {# Header #}
+        {% include "partials/header.twig" %}
+        
         {# Flash messages displayed here #}
         {% if flashMessages %}
             <div id="messages">
@@ -24,9 +28,14 @@
         {% endif %}
         
         {# Individual page content is rendered below #}
-        <div id="content">
-            {# Page content will be rendered in the body block #}
-            {% block body %} {% endblock %}
+        <div id="wrapper">
+            <main class="grid grid-pad">
+                {# Page content will be rendered in the body block #}
+                {% block body %} {% endblock %}
+            </main>
         </div>
+        
+        {# Footer #}
+        {% include "partials/footer.twig" %}
     </body>
 </html>

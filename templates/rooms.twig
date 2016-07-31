@@ -24,6 +24,14 @@
                 Private: {{room.private ? 'Yes' : 'No' }}
                 <br>
                 Members: {{room.members.count}}
+                <br>
+                {% if currentUser == room.owner %}
+                    <form action={{ path_for("delete_room", { 'id': room.id }) }} method="POST">
+                        <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+                        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                        <button type="submit">Delete</button>
+                    </form>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

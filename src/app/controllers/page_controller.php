@@ -11,4 +11,9 @@ class PageController extends BaseController {
     public function help($request, $response) {
         return $this->renderer->render($response, 'help.twig', $this->locals($request));
     }
+    
+    // GET '/contact'
+    public function contact($request, $response) {
+        return $this->renderer->render($response, 'contact.twig', $this->locals($request));
+    }
 }
