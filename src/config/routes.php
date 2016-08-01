@@ -22,6 +22,7 @@ $app->post('/rooms/{id}/favourite', 'Controllers\RoomController:favourite')->set
 $app->get('/rooms/{id}', 'Controllers\RoomController:show')->setName('room');
 $app->post('/rooms/{id}/message', 'Controllers\RoomController:message');
 $app->get('/rooms/{id}/messages', 'Controllers\RoomController:messages');
+$app->get('/rooms/{id}/download', 'Controllers\RoomController:download')->setName('room_save');
 
 // Misc
 $app->get('/about', 'Controllers\PageController:about')->setName('about');

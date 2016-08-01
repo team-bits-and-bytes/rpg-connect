@@ -140,7 +140,8 @@ class RoomController extends BaseController {
         }
         
         $locals = array_merge([
-        ], $this->locals($request));    
+            'room' => $room
+        ], $this->locals($request));
         return $this->renderer->render($response, 'rooms/chat.twig', $locals);
     }
     
@@ -152,7 +153,7 @@ class RoomController extends BaseController {
         // clean up the csrf values from the form
         unset($data['csrf_name']);
         unset($data['csrf_value']);
-
+        
         $messages = $this->ci->get('redis')->jsonget($cache_key);
         
         // set the message id
@@ -208,6 +209,37 @@ class RoomController extends BaseController {
             }
         }
         return $response->withJson($data, 200);
+    }
+    
+    public function download($request, $response, $args) {
+        if ($this->current_user() == null) {
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
+        }
+        
+        // Return if the user is not a member
+        $room = Room::where('id', $args['id'])->first();
+        if ($room->is_member == false) {
+            return $response->withRedirect($this->ci->get('router')->pathFor('root'));
+        }
+        
+        $cache_key = $room->id . '_messages';
+        $messages = $this->ci->get('redis')->jsonget($cache_key);
+        $file_name = $room->id . '_chat_log.txt';
+        
+        // transform the data from JSON to human-readable text
+        $data = [];
+        foreach ($messages as $message) {
+            array_push($data, $message->from->name . ': ' . $message->message);
+        }
+        
+        $data = array_reduce($data, function($carry, $item) {
+           return $carry . $item . "\r\n"; 
+        });
+        
+        $response->getBody()->write($data);
+        return $response->withHeader('Content-Disposition', 'attachment; filename=' . $file_name)
+            ->withHeader('Content-Type', 'text/plain')
+            ->withStatus(200);
     }
     
     private function createRoom($params) {

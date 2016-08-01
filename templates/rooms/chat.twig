@@ -67,5 +67,9 @@
             <a href="#" data-num="6" data-die="6">Roll 6d6</a>
             <a href="#" data-num="2" data-die="20">Roll 2d20</a>
         </div>
+        
+        <div class="save">
+            <a href={{ path_for("room_save", { 'id': room.id }) }}>Save Log</a>
+        </div>
     </div>
 {% endblock %}
