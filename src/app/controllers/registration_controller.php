@@ -72,6 +72,21 @@ class RegistrationController extends BaseController {
             return false;
         }
         
+        // since we allow sign in via username OR email, don't allow '@' to
+        // exist in usernames
+        if (strpos($params['username'], '@') !== false) {
+            $this->is_invalid = true;
+            $this->validation_error ='Username may not contain the \'@\' character.';
+            return false;
+        }
+        
+        // minimum length of 6 for the password!
+        if (strlen($params['password']) < 6) {
+            $this->is_invalid = true;
+            $this->validation_error ='Password must be 6 or more characters.';
+            return false;
+        }
+        
         // passwords don't match
         if ($params['password'] != $params['password_confirm']) {
             $this->is_invalid = true;
