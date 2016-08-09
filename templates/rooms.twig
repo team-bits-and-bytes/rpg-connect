@@ -1,56 +1,85 @@
 {% extends "layout.twig" %}
-
 {% block body %}
-    <h1>Create a new Chatroom</h1>
-    <form action="{{ path_for("create_room") }}" method="POST">
-        <input type="hidden" name="csrf_name" value={{ csrf_name }}>
-        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-        
-        <input type="text" name="name" placeholder="Chatroom name">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="password_confirm" placeholder="Confirm Password">
-        
-        <button type="submit">Create</button>
-    </form>
+<div class="page-content">
+    <h1>Manage Rooms</h1>
     
-    {# List of rooms the user owns #}
-    <ul>
-        {% for room in currentUser.rooms %}
-            <li style="margin-bottom: 10px;">
-                Name: {{room.name}}
-                <br>
-                Owner: {{room.owner.name}}
-                <br>
-                Private: {{room.private ? 'Yes' : 'No' }}
-                <br>
-                Members: {{room.members.count}}
-                <br>
-                
-                <form action={{ path_for("room", { 'id': room.id }) }} method="GET" style="display: inline;">
-                    <button type="submit">Open</button>
-                </form>
-                
-                <form action={{ path_for("favourite_room", { 'id': room.id }) }} method="POST" style="display: inline;">
-                    <input type="hidden" name="csrf_name" value={{ csrf_name }}>
-                    <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-                    <input type="hidden" name="favourite" value={{ room.is_favourite ? "false" : "true" }}>
-                    <button type="submit">{{ room.is_favourite ? "Unfavourite" : "Favourite" }}</button>
-                </form>
-                
-                {% if currentUser == room.owner %}
-                    <form action={{ path_for("delete_room", { 'id': room.id }) }} method="POST" style="display: inline;">
-                        <input type="hidden" name="csrf_name" value={{ csrf_name }}>
-                        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-                        <button type="submit">Delete</button>
-                    </form>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    <div id="manage-rooms-content">
+        <div id="user-info">
+            <div id="avatar-sml">
+                <img id="current_avatar" src="{{ currentUser.avatar }}">
+            </div>
+        </div>
+        <div id="search-rooms">
+            <h3>Search for Chatrooms by name: </h3><br/>
+            {# Search #}
+            <form action="{{ path_for("search_rooms") }}" method="GET">
+                <input type="text" name="query" placeholder="Search">
+                <button class="button" type="submit">Search</button>
+            </form>
+        </div>    
+        <div class="spacer" style="clear: both;"/>
+    </div>
+    <hr>
+
     
-    {# Search #}
-    <form action="{{ path_for("search_rooms") }}" method="GET">
-        <input type="text" name="query" placeholder="Search">
-        <button type="submit">Search</button>
-    </form>
+    <div id="create-chatroom">
+        <h2>Create a new Chatroom</h2>
+        <form action="{{ path_for("create_room") }}" method="POST" class="basic-grey">
+            <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+            <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                    
+            <label><span>Chatroom name: </span><input type="text" name="name" placeholder="Chatroom name"></label>
+            <label><span>Password (Optional): </span><input type="password" name="password" placeholder="Password"></label>
+            <label><span>Confirm Password (Optional): </span><input type="password" name="password_confirm" placeholder="Confirm Password"></label>
+            <button class="button" type="submit">Create</button>
+        </form>
+    </div>
+    
+    <div id="public-chatrooms-list">
+        <h2>List of Public Chatrooms: </h2>
+        {# List of rooms the user owns #}
+        <ul>
+            {% for room in public_rooms %}
+                <li style="margin-bottom: 10px;">
+                    Name: {{room.name}}
+                    <br>
+                    Owner: {{room.owner.name}}
+                    <br>
+                    Private: {{room.private ? 'Yes' : 'No' }}
+                    <br>
+                    Members: {{room.members.count}}
+                    <br>
+                    
+                    {% if room.is_member %}
+                        <form action={{ path_for("room", { 'id': room.id }) }} method="GET" style="display: inline;">
+                            <button class="button"  type="submit">Open</button>
+                        </form>
+                    
+                        <form action={{ path_for("favourite_room", { 'id': room.id }) }} method="POST" style="display: inline;">
+                            <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+                            <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                            <input type="hidden" name="favourite" value={{ room.is_favourite ? "false" : "true" }}>
+                            <button class="button"  type="submit">{{ room.is_favourite ? "Unfavourite" : "Favourite" }}</button>
+                        </form>
+                    {% else %}
+                        <form action="{{ path_for("join_room", { 'id': room.id }) }}" method="POST">
+                            <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+                            <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                            <button class="button" type="submit">Join</button>
+                        </form>
+                    {% endif %}
+                    
+                    {% if currentUser == room.owner %}
+                        <form action={{ path_for("delete_room", { 'id': room.id }) }} method="POST" style="display: inline;">
+                            <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+                            <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+                            <button class="button"  type="submit">Delete</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="spacer" style="clear: both;"/>
+</div>
 {% endblock %}

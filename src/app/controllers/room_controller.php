@@ -21,7 +21,10 @@ class RoomController extends BaseController {
         if ($this->current_user() == null) {
             return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
-        return $this->renderer->render($response, 'rooms.twig', $this->locals($request));
+        $locals = array_merge([
+            'public_rooms' => Room::where('password', null)->get()    
+        ], $this->locals($request));
+        return $this->renderer->render($response, 'rooms.twig', $locals);
     }
     
     // POST '/rooms'
@@ -137,6 +140,12 @@ class RoomController extends BaseController {
         if (is_null($room)) {
             $this->flash->addMessage('error', 'Room does not exist.');
             return $resposne->withRedirect($this->ci->get('router')->pathFor('rooms'));
+        }
+        
+        // redirect if user isn't a member
+        if ($room->is_member == false) {
+            $this->flash->addMessage('error', 'You are note a member of this room.');
+            return $resposne->withRedirect($this->ci->get('router')->pathFor('rooms'));  
         }
         
         $locals = array_merge([
