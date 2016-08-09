@@ -18,6 +18,7 @@ require __DIR__ . '/../src/config/middleware.php';
 require __DIR__ . '/../src/app/models/user.php';
 require __DIR__ . '/../src/app/models/room.php';
 require __DIR__ . '/../src/app/models/member.php';
+require __DIR__ . '/../src/app/models/note.php';
 
 // Register controllers
 require __DIR__ . '/../src/app/controllers/base_controller.php';
@@ -27,6 +28,7 @@ require __DIR__ . '/../src/app/controllers/session_controller.php';
 require __DIR__ . '/../src/app/controllers/user_controller.php';
 require __DIR__ . '/../src/app/controllers/room_controller.php';
 require __DIR__ . '/../src/app/controllers/page_controller.php';
+require __DIR__ . '/../src/app/controllers/note_controller.php';
 
 // Register routes
 require __DIR__ . '/../src/config/routes.php';

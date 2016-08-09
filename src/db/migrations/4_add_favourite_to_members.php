@@ -6,7 +6,7 @@ class AddFavouriteToMembers extends DatabaseBase {
             return;
         }
         
-        if ($this->schema->hasColumn('members', 'favourte')) {
+        if ($this->schema->hasColumn('members', 'favourite')) {
             return;
         }
         

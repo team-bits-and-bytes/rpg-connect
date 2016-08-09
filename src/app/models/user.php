@@ -12,6 +12,10 @@ class User extends Model {
     // Hide these fields from the serialized object
     protected $hidden = ['password', 'created_at', 'updated_at'];
     
+    public function note() {
+        return $this->hasOne('Models\Note');
+    }
+    
     // One-To-Many relationship with rooms
     public function getRoomsAttribute() {
         return Member::where('user_id', $this->attributes['id'])

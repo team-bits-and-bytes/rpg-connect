@@ -12,6 +12,10 @@ $app->map(['GET', 'DELETE'], '/logout', 'Controllers\SessionController:destroy')
 $app->get('/user', 'Controllers\UserController:index')->setName('user');
 $app->post('/user', 'Controllers\UserController:update')->setName('edit_user');
 
+$app->post('/note', 'Controllers\NoteController:create')->setName('create_note');
+$app->map(['GET', 'DELETE'], '/note/delete', 'Controllers\NoteController:delete')->setName('delete_note');
+$app->get('/note/download', 'Controllers\NoteController:download')->setName('download_note');
+
 // Room Features
 $app->get('/rooms', 'Controllers\RoomController:index')->setName('rooms');
 $app->post('/rooms', 'Controllers\RoomController:create')->setName('create_room');
@@ -28,3 +32,4 @@ $app->get('/rooms/{id}/download', 'Controllers\RoomController:download')->setNam
 $app->get('/about', 'Controllers\PageController:about')->setName('about');
 $app->get('/help', 'Controllers\PageController:help')->setName('help');
 $app->get('/contact', 'Controllers\PageController:contact')->setName('contact');
+$app->get('/login', 'Controllers\PageController:login')->setName('login');

@@ -1,1 +1,30 @@
-<h1>You're logged in, {{currentUser.name}}</h1>
+<div class="page-content">
+    <div id="user-info-home">
+        <h3>Welcome, {{currentUser.name}}</h3><br/>
+        <div id="avatar-lrg">
+            <img id="current_avatar" src="{{ currentUser.avatar }}">
+        </div>
+    </div>
+    <div id="notebook-home">
+         <form action="{{ path_for('create_note') }}" method="POST" id="notebook-form">
+            <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+	        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+	        
+            <label>
+                <span>&nbsp;</span>
+                <textarea id="notebook" name="body" placeholder="..." required>{% if currentUser.note.body %}{{ currentUser.note.body }}{% endif %}</textarea>
+            </label><br/>
+             <label>
+                <span>&nbsp;</span>
+                <input type="submit" class="button" value="Save to Profile" />
+                {% if currentUser.note.body %}
+                    <!-- download -->
+                    <a href="{{ path_for('download_note') }}" class="button">Save to Desktop</a>
+                    <!-- delete -->
+                    <a href="{{ path_for('delete_note') }}" class="button">Delete from Profile</a>
+                {% endif %}
+            </label>    
+        </form   
+    </div>
+    <div class="spacer" style="clear: both;"/>
+</div>

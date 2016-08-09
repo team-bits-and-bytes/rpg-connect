@@ -3,6 +3,12 @@ namespace Controllers;
 
 class HomeController extends BaseController {
     public function index($request, $response) {
-        return $this->renderer->render($response, 'home.twig', $this->locals($request));
+        $locals = $this->locals($request);
+        if ($this->current_user() != null) {
+            $locals = array_merge([
+                'note' => $this->current_user()->note
+            ], $locals);
+        }
+        return $this->renderer->render($response, 'home.twig', $locals);
     }
 }
