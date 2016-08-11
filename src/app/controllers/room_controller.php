@@ -21,8 +21,16 @@ class RoomController extends BaseController {
         if ($this->current_user() == null) {
             return $response->withRedirect($this->ci->get('router')->pathFor('root'));
         }
+        
+        $public_rooms = Room::where('password', null)->get()->reject(function($room) {
+            return $room->is_favourite;
+        });
+        
         $locals = array_merge([
-            'public_rooms' => Room::where('password', null)->get()    
+            'public_rooms' => $public_rooms,
+            'favourite_rooms' => Room::whereHas('members', function($query) {
+                $query->where('user_id', $this->current_user()->id)->where('favourite', true);
+            })->get()
         ], $this->locals($request));
         return $this->renderer->render($response, 'rooms.twig', $locals);
     }
@@ -220,6 +228,7 @@ class RoomController extends BaseController {
         return $response->withJson($data, 200);
     }
     
+    // GET '/rooms/{id}/download'
     public function download($request, $response, $args) {
         if ($this->current_user() == null) {
             return $response->withRedirect($this->ci->get('router')->pathFor('root'));
