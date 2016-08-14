@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+
+{% block body %}
+<div class="page-content">
+    <h1>Login</h1>
+    <div id="login-page">
+		<form method="POST" action={{ path_for("create_session") }} class="basic-grey">
+			<input type="hidden" name="csrf_name" value={{ csrf_name }}>
+	        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+	        
+			<label><span>Username: </span><input type="text" name="email" placeholder="Username or Email" required></label>
+			<label><span>Password:</span><input type="password" name="password" placeholder="Password" required></label>
+			<button type="submit" name="commit" value="Login" class="button">Login</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

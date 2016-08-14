@@ -6,28 +6,36 @@
 
 {# This content is rendered under the `content` block in `layout.html` #}
 {% block body %}
+<div class="page-content">
+    <h1>Manage Account</h1>
     {# The avatar input is outside the form because we convert the image to a data-uri format
        via JavaScript. #}
-    <img id="current_avatar" src="{{ currentUser.avatar }}">
-    <input id="avatar_upload" type="file" name="avatar_upload">
-            
-    <form action={{ path_for('edit_user') }} method="POST">
+    <div id="avatar">
+        <h2>Change Avatar:</h2>
+        <img id="current_avatar" src="{{ currentUser.avatar }}">
+        <div id="update-avatar">
+            <input id="avatar_upload" type="file" name="avatar_upload">
+        </div>   
+    </div>
+     
+    <form action={{ path_for('edit_user') }} method="POST" class="basic-grey">
         <input type="hidden" name="csrf_name" value={{ csrf_name }}>
         <input type="hidden" name="csrf_value" value={{ csrf_value }}>
         
         {# Hidden field as we store the data-uri string for the avatar here #}
         <input type="hidden" name="avatar" value="{{ currentUser.avatar }}">
         
-        <input type="email" name="email" value="{{ currentUser.email }}">
-        <input type="text" name="name" value="{{ currentUser.name }}">
-        <input type="text" name="location" value="{{ currentUser.location }}" placeholder="Location">
-        <input type="url" name="website" value="{{ currentUser.website }}" placeholder="Website">
-        <textarea name="about" placeholder="About" maxlength="255">{{ currentUser.about }}</textarea>
+        <label><span>Email: </span><input type="email" name="email" value="{{ currentUser.email }}"></label>
+        <label><span>Name: </span><input type="text" name="name" value="{{ currentUser.name }}"></label>
+        <label><span>Location: </span><input type="text" name="location" value="{{ currentUser.location }}" placeholder="Location"></label>
+        <label><span>Website: </span><input type="url" name="website" value="{{ currentUser.website }}" placeholder="Website"></label>
+        <label><span>Description: </span><textarea name="about" placeholder="About" maxlength="255">{{ currentUser.about }}</textarea></label>
         
-        <input type="password" name="password" placeholder="Current Password">
-        <input type="password" name="new_password" placeholder="New Password">
-        <input type="password" name="new_password_confirm" placeholder="Confirm New Password">
-        
-        <button type="submit">Update</button>
+        <label><span>Current password: </span><input type="password" name="password" placeholder="Current Password"></label>
+        <label><span>New password: </span><input type="password" name="new_password" placeholder="New Password"></label>
+        <label><span>Confirm new password: </span><input type="password" name="new_password_confirm" placeholder="Confirm New Password"></label>
+        <br />
+        <button class="button" type="submit">Update</button>
     </form>
+</div>
 {% endblock %}

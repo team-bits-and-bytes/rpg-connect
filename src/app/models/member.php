@@ -11,7 +11,7 @@ class Member extends Model {
     protected $hidden = ['updated_at'];
     
     // Allow mass assignment on these attributes
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'favourite'];
     
     // Cast these attributes into this type
     protected $casts = ['favourite' => 'boolean'];

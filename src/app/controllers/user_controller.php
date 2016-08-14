@@ -1,6 +1,8 @@
 <?php
 namespace Controllers;
 
+use Models\User;
+
 class UserController extends BaseController {
     public function index($request, $response) {
         // redirect if the user isn't authenticated

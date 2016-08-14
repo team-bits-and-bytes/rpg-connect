@@ -1,65 +1,42 @@
 {# This partial is used for the root page when the user is not logged in! #}
 
-<div class="threefourthsCol">
-    <div class="inside">
-        <h1>What is RPG Connect?</h1>
-		<p>
-            Hi thereLet's start with a practical and common need:
-    	    a main content area being 2/3 the width and a sidebar being 1/3
-    		the width. We just make two column divs with appropriate class names.
-		 </p>
+<div class="page-content">
+	<h2>What is RPG Connect?</h2>
+	<p>
+		RPG connect is chatroom service that’s designed to support playing in groups, 
+		<a href="http://en.wikipedia.org/wiki/Tabletop_role-playing_game">Pen & Paper Roleplaying games</a> 
+		online. Here you can create, join and save your favourite chatrooms to your account for easy access, 
+		the chatrooms support hosting multiple players and also has a Random Dice Roller that posts the results
+		to chat for all the players to see. To find out more check out our <a href={{ path_for("about") }}>About</a> page.
+	</p>
+	<hr>
+
+	<div id="newfeatures">
+		<h2>New Features</h2>
+	    <p>
+			<span style="font-weight: bold;">Posted by:</span> <a href="mailto:RPGConnectAdmin@gmail.com">RPGConnectAdmins</a>. 28th August 2016.<br/>
+			RPG Connect has gone live! Head over to the <a href={{ path_for("register") }}>Register</a> page to create an account!<br/>
+			<span style="text-decoration: underline;">Current features include:</span><br/>
+			-	Create, Join and Save to your account, RPG Connect chatrooms.<br/>
+			-	Random Dice Roller Feature (Supported dice: D4, D6, D8, D10, D12, D20, D100 and DX where you can enter your own result range!<br/>
+			-	Save chat log to your computer (.TXT)<br/>
+			-	Edit RPG Connect user profile<br/>
+			<span style="font-weight: bold;">…more coming soon.</span><br/>
+	    </p>
+    </div>
+    
+	<div id="login">
+		<h2>Returning Users</h2>
+		<form method="POST" action={{ path_for("create_session") }} class="basic-grey">
+			<input type="hidden" name="csrf_name" value={{ csrf_name }}>
+	        <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+	        
+			<label><span>Username: </span><input type="text" name="email" placeholder="Username or Email" required></label>
+			<label><span>Password:</span><input type="password" name="password" placeholder="Password" required></label>
+			<button type="submit" name="commit" value="Login" class="button">Login</button>
+		</form>
 	</div>
+	<div class="spacer" style="clear: both;"></div>
 </div>
 
-<div class="fourthCol aligncenter">
-    <button class="buttontwo">Create Account</button>
-</div>
-		
-<div class="thirdCol clearfloat">
-    <img src="images/dice20.png" alt="dicelarge">
-</div>
 
-<div class="thirdCol">
-    <div class="inside">
-        <div class="login">
-			<h1>Returning Users</h1><br>
-			<form method="POST" action={{ path_for("create_session") }}>
-			    <input type="hidden" name="csrf_name" value={{ csrf_name }}>
-                <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-        
-				<p>Login:</p>
-				<p><input type="text" name="email" placeholder="Username or Email"></p>
-				<br>
-				<p>Password:</p>
-				<p><input type="password" name="password" placeholder="Password"></p>
-				<br>
-                <p class="submit"><input type="submit" name="commit" value="Login"></p>
-            </form>
-		</div>
-	</div>
-</div>
-
-<div class="thirdCol">
-    <div class="inside">
-		<h1>New Features:</h1>
-		<div id="newfeatures" class="alignleft">
-    		<p>
-    		    blah blah blahHi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area <br><br>being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being<br><br> 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3<br><br> the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 <br><br>the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    			Hi thereLet's start with a practical and common need: a main content area being 2/3 the width and a sidebar being 1/3 the width. We just make two column divs with appropriate class names.
-    		</p>
-		</div>
-	</div>
-</div>

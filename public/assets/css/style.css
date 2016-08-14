@@ -3,6 +3,8 @@
    License: none (public domain)
 */
 
+/**RESETS**/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -16,37 +18,38 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 blockquote, q {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
+    color: #4169E1;
 }
 
 
@@ -55,64 +58,64 @@ a {
 /*GENERAL*/
 
 h1{
-	font-size: 1.35em;
-	font-weight: 300;
-	line-height: 2em;
-	
-	
+    font-size: 1.35em;
+    font-weight: 300;
+    line-height: 2em;
 }
 
 p{
-	line-height: 1.3em;
+    line-height: 1.3em;
 }
 
 
-/*GRID*/
+/*GRID system allows for ea positioning of divs based on divided areas*/
 
 #wrapper {
-	margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
-.clearfloat {
-	clear: both; 
-	margin-bottom: 50px;
-}
-
-.thirdCol {
-	width: 33.33%;
-}
-
-.thirdCol img{
-	width: 100%;
-}
-
-.thirdCol h1{
-	text-align: center;
-}
 
 .aligncenter {
-	text-align: center;
+    text-align: center;
 }
 
 .alignleft {
-	text-align: left; 
+    text-align: left; 
 }
 
-.twothirdsCol{
-	width: 66.66%;	
+.oneCol{
+    width: 100%;
 }
 
-.threefourthsCol {
-	width: 75%;
+.oneCol h1{
+    text-align: left;
+    display:inline;
+}
+
+.thirdCol {
+    width: 33.33%;
+}
+
+.thirdCol img{
+    height: 367px;
 }
 
 .fourthCol {
-	width: 25%;
+    width: 25%;
+}
+
+.fourthCol h1{
+    clear:left;
 }
 
 .twothirdsCol {
-	text-align: center;
-	color: black;
+  width:66.66%;
+    text-align: center;
+    color: black;
+}
+
+.twofourthsCol{
+    width: 50%;
 }
 
 
@@ -139,39 +142,34 @@ p{
   padding-right: 0;
 }
 
-.grid-pad {
-  padding: 20px 0 20px 20px;
+[class*='Col'] img{
+    width: 100%;
 }
 
-.grid-pad > [class*='Col']:last-of-type {
-  padding-right: 20px;
+[class*='Col'] textarea{
+    width: 100%;
 }
+
+[class*='Col'] button, [class*='Col'] input[type=submit]{
+    margin-top: 20px;
+}
+
+
 
 .hiddenCol{
-	width: auto;
-	border-radius: 10px;
-	padding: 1.5em;
+    width: auto;
+    border-radius: 10px;
+    padding: 1.5em;
 }
 
 .inside {
-	background-color: #FFFFFF;
-	width: auto;
-	border-radius: 10px;
-	padding: 1.5em;
-	text-align: center;
+    background-color: #FFFFFF;
+    width: auto;
+    border-radius: 10px;
+    padding: 1.5em;
+    text-align: center;
 }
 
-
-
-#newfeatures{
-	overflow-y: scroll;
-	height: 390px;
-}
-
-#newfeatures::-webkit-scrollbar{
-	width:1em;
-	background-color: #424B54;
-}
 
 body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -183,22 +181,16 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-
-
 /* HEADER */
 
 body {
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	background-color: #EBCFB2;
-	height: 100%;
-	margin: 0px;
-	padding: 0px;
-	line-height: 1em;
-}
-
-p {
-   
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    background-color: #EBCFB2;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    line-height: 1em;
 }
 
 nav {
@@ -223,61 +215,565 @@ padding: .2em 1em;
 }
 
 nav li a:hover {
-	color: #AF9164;
+    color: #AF9164;
 }
 
 header {
-	height: 100px;
-	background-color: #424B54;
+    height: 100px;
+    background-color: #424B54;
 }
 
 #logo {
-	display: block;
-	position: absolute;
-	left: 20px;
-	top: 20px;
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 20px;
 }
 
-#logindiv {
-	position: absolute;
-	right: 20px;
-	top: 20px;
-	text-align: right;
-}
 
-#loginbtnhome {
-	display: none;
 
+a.button {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+      border-radius: 10px;
+    background-color: #E1CE7A;
+    padding: 1em; 
+        border: none;
+        color: #F7F3E3;
+        
 }
 
 button {
-		font-family: 'Roboto', sans-serif;
-		font-size: 14px;
-	  border-radius: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+      border-radius: 10px;
     background-color: #E1CE7A;
     padding: 1em; 
-		border: none;
-		color: #F7F3E3;
-
-	
+        border: none;
+        color: #F7F3E3;
 }
 
-.buttontwo{
-	background-color: #424B54;
-	color: #F7F3E3;
-	font-weight: 500;
-	height: 70px;
-	width: 150px;
-	margin-top: 20px;
-	
-
-	
+.button {
+    background-color: #E1CE7A;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    cursor: pointer;
+}
+.button:hover {
+    background: #7ae1ce;
 }
 
-#largedice {
-	width: auto;
+
+/* PAGE CONTENT  */
+.page-content{
+  margin: 0 auto;
+    background-color: #FFFFFF;
+    width: 80%;
+    border-radius: 0 0 10px 10px;
+    padding: 1.5em;
+    min-height: 700px;
+    min-height: 85vh;
 }
 
+
+
+.page-content h1{
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 30px; 
+    font-weight: 300; 
+    line-height: 32px; 
+    margin: 0 0 10px; 
+    text-align:  center;    
+}
+
+.page-content h2 {
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 25px; 
+    font-weight: 300; 
+    line-height: 32px; 
+    margin: 10px 0 25px; 
+    padding-left: 10px;
+}
+
+.page-content p {
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 15px; 
+    font-weight: 300; 
+    line-height: 32px; 
+        padding-left: 20px;
+}
+
+.page-content span p {
+ text-align:  center;       
+}
+
+
+
+input[type=text], input[type=password] { width: 278px; }
+
+label {
+  font-size: 12px;
+  color: #777;
+  cursor: pointer;
+}
+
+input {
+  position: relative;
+  bottom: 1px;
+  margin-right: 4px;
+  vertical-align: middle;
+  font-size:14px;
+}
+
+input[type=text] {
+  margin: 10px;
+  padding: 0 10px;
+  width: 200px;
+  height: 34px;
+  color: #404040;
+  background: white;
+  border: 1px solid;
+  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+  border-radius: 2px;
+  outline: 5px solid #eff4f7;
+}
+
+p.submit { text-align: right; }
+
+input {
+  font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+input[type=text], input[type=password], input[type=date], input[type=email], input[type=url] {
+  margin: 5px;
+  padding: 0 10px;
+  width: 200px;
+  height: 34px;
+  color: #404040;
+  background: white;
+  border: 1px solid;
+  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+  border-radius: 2px;
+  outline: 5px solid #eff4f7;
+}
+
+
+input[type=submit] {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: #E1CE7A;
+  padding: 1em; 
+  border: none;
+  color: #F7F3E3;
+  text-align: center;
+}
+
+/* HOME */
+
+#newfeatures{
+    overflow-y: scroll;
+    height: 390px;
+    float: left;
+    width: 50%;
+}
+
+#newfeatures::-webkit-scrollbar{
+    width:1em;
+    background-color: #424B54;
+}
+
+#newfeatures h2{
+  text-align: center;
+}
+
+#newfeatures p{
+  width: 90%;
+  box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.4);
+}
+
+/**returning users**/
+#login{
+    float: right;
+    width: 50%;
+}
+
+#login h2{
+  text-align: center;
+}
+
+
+/* DASHBOARD */
+#user-info-home{
+  width: 20%;
+  float: left;
+}
+
+#user-info-home h3{
+  font-size: 18px;
+}
+
+#notebook-home{
+  width: 80%;
+  float: right;
+}
+
+/** Logout, Register Login buttons**/
+#logindiv{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    text-align: right;
+}
+
+
+/* Manage Account and Manage Rooms CSS */
+
+#messages{
+  background-color: #E27575;
+  text-align: center;
+  color: #ffffff;
+}
+
+#manage-rooms-content{
+    text-align: Center;
+}
+
+#user-info{
+    float: left;    
+    width: 50%;
+    text-align: left;
+}
+
+#search-rooms{
+    width: 50%;
+    float: right;
+}
+
+#avatar{
+    width: 200px;
+    height: 60px;
+    float: left;
+}
+
+#avatar img {
+    width: 100%;
+    height: auto;
+}
+
+#avatar-sml{
+    float: left;
+    width: 75px;
+    height: 60px;
+}
+
+#avatar-sml img {
+    width: 100%;
+    height: auto;
+}
+
+#avatar-lrg{
+  float: left;
+    width: 200px;
+    height: 60px;
+}
+
+#avatar-lrg img {
+  width: 100%;
+    height: auto;
+}
+
+#create-chatroom {
+    float: left;
+    width: 50%;
+}
+
+#public-chatrooms-list {
+    height: 100%;
+    float: right;
+    width: 50%;
+}
+
+/* Search */
+#search-list{
+  overflow: auto;
+}
+
+
+/* chatroom */
+.dice {
+  float: left;
+  width: 20%;
+  }
+
+#chat-log{
+  height: 600px;
+  width: 60%;
+  overflow: scroll;
+  margin: 0 auto;
+  background-color: #F7F3E3;
+}
+
+#userlist {
+  margin-top:38px;
+    height:440px;
+  width: 100%;
+  float: right;
+  list-style-type: none;
+  overflow-y: scroll;
+}
+
+
+/* login page */
+#login-page{
+  padding-top: 50px;
+}
+
+/* Form CSS */
+/* Basic Grey */
+.basic-grey {
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 500px;
+    background: #F7F7F7;
+    padding: 25px 15px 25px 10px;
+    font: 12px Georgia, "Times New Roman", Times, serif;
+    color: #888;
+    text-shadow: 1px 1px 1px #FFF;
+    border:1px solid #E4E4E4;
+}
+.basic-grey h1 {
+    font-size: 25px;
+    padding: 0px 0px 10px 40px;
+    display: block;
+    border-bottom:1px solid #E4E4E4;
+    margin: -10px -15px 30px -10px;;
+    color: #888;
+}
+.basic-grey h1>span {
+    display: block;
+    font-size: 11px;
+}
+.basic-grey label {
+    display: block;
+    margin: 0px;
+}
+.basic-grey label>span {
+    float: left;
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 10px;
+    color: #888;
+}
+.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey input[type="url"], .basic-grey textarea, .basic-grey select {
+    border: 1px solid #DADADA;
+    color: #888;
+    height: 30px;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: 0 none;
+    padding: 3px 3px 3px 5px;
+    width: 70%;
+    font-size: 12px;
+    line-height:15px;
+    box-shadow: inset 0px 1px 4px #ECECEC;
+    -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+    -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+.basic-grey textarea{
+    padding: 5px 3px 3px 5px;
+}
+.basic-grey select {
+    background: #FFF url('down-arrow.png') no-repeat right;
+    background: #FFF url('down-arrow.png') no-repeat right;
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width: 70%;
+    height: 35px;
+    line-height: 25px;
+}
+.basic-grey textarea{
+    height:100px;
+}
+.basic-grey .button {
+    background: #E1CE7A;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    cursor: pointer;
+}
+.basic-grey .button:hover {
+    background: #7ae1ce;
+}
+
+/* Notebook form */
+#notebook-form textarea{
+  height: 500px;
+  width: 90%;
+  font-size: 12px;
+  line-height:15px;
+  box-shadow: inset 0px 1px 4px #ECECEC;
+  -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+  -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+
+#notebook-form .button {
+    background-color: #E1CE7A;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #F7F3E3;
+    cursor: pointer;
+}
+#notebook-form .button:hover {
+    background: #7ae1ce;
+}
+
+
+#saveexit   {
+    float:left;
+    position: absolute;
+    top:0;
+    right:0;
+}
+
+.compatiblebrowsers img{
+    float:left;
+    }
+
+.compatiblebrowers{
+    margin-top:30px;
+    }
+    
+.nobottommargin {
+margin-bottom: 0px !important;
+}
+
+#dicerollerdiv{
+    height: 400px;
+    -webkit-transform:scale(0.7);
+    -moz-transform:scale(0.7);
+    -ms-transform:scale(0.7);
+    transform:scale(0.7);
+    position:relative;
+    bottom: 66px;
+}
+
+#diceroller{
+    padding-right: 0px;
+    border-right:2px #E1CE7A;   
+}   
+
+#diceroller input[type=text]{
+    width: 100%;
+}
+
+#diceroller [class*='Col']:last-of-type {
+    padding-right: 20px;
+}
+
+#diceroller label {
+    width: 100%;
+    display: block;
+    margin: 5px 5px 5px 10px;
+    float: left;
+}
+
+#dicerollerbuttons{
+    padding: 15px;
+    font-size: 18px;
+}
+
+.dicerollerDice {
+background-color: #eff4f7;
+padding: 15px;
+border-radius: 5px;
+}
+
+
+#chatroomdiv{
+    padding-right: 0px;
+    border-right:2px #E1CE7A;
+    position:relative;
+}
+
+#messagedisplay{
+      margin-top: 20px;
+    height: 377px;
+}
+
+#chattext{
+margin-top: 20px;
+margin-right: -7px;
+height: 150px;
+width: 600px;
+overflow-y: scroll;
+}
+
+.infotextarea{
+    background-color: #F7F3E3;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 1.3em;
+    padding: 20px;
+    overflow-y: scroll; 
+}
+
+.diceinput p{
+ float:left;
+ margin-right: 10px;
+}
+
+#chatroom {
+    height:380px;
+}
+
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* FOOTER */
 
 footer {
     background-color: #424B54;
@@ -291,107 +787,21 @@ footer {
 
 
 #footersocial {
-	position: absolute;
-	left: 20px;
-	bottom: 25px;
+    position: absolute;
+    left: 20px;
+    bottom: 25px;
 }
 
 #footersocial li {
-	display: inline;
-	padding-right: 1em;
+    display: inline;
+    padding-right: 1em;
 }
 
 #footersocial li a {
-	color: #F7F3E3;
+    color: #F7F3E3;
 }
 
 footer p {
-	color: #F7F3E3;
-	margin-top: 20px;
-}
-
-
-
-.username {
-  position: relative;
-  margin: 0 auto;
-  padding: 20px 20px 20px;
-  width: 310px;
-  background: white;
-  border-radius: 3px;
-  @include box-shadow(0 0 200px rgba(white, .5), 0 1px 2px rgba(black, .3));
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: -8px; right: -8px; bottom: -8px; left: -8px;
-    z-index: -1;
-    background: rgba(black, .08);
-    border-radius: 4px;
-  }
-input[type=text], input[type=password] { width: 278px; }
-
-  p.loginrem {
-    float: left;
-    line-height: 31px;
-
-    label {
-      font-size: 12px;
-      color: #777;
-      cursor: pointer;
-    }
-
-    input {
-      position: relative;
-      bottom: 1px;
-      margin-right: 4px;
-      vertical-align: middle;
-    }
-  }
-
-  p.submit { text-align: right; }
-}
-
-input {
-  font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
-  font-size: 14px;
-}
-
-input[type=text], input[type=password], input[type=date], input[type=email] {
-  margin: 5px;
-  padding: 0 10px;
-  width: 200px;
-  height: 34px;
-  color: #404040;
-  background: white;
-  border: 1px solid;
-  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
-  border-radius: 2px;
-  outline: 5px solid #eff4f7;
-  -moz-outline-radius: 3px; // Can we get this on WebKit please?
-  @include box-shadow(inset 0 1px 3px rgba(black, .12));
-
-  &:focus {
-    border-color: #7dc9e2;
-    outline-color: #dceefc;
-    outline-offset: 0; // WebKit sets this to -1 by default
-  }
-}
-
-
-input[type=submit] {
-		font-family: 'Roboto', sans-serif;
-		font-size: 14px;
-	  border-radius: 10px;
-    background-color: #E1CE7A;
-    padding: 1em; 
-		border: none;
-		color: #F7F3E3;
-		text-align: center;
-
-}
-
-
-.lt-ie9 {
-  input[type=text], input[type=password] { line-height: 34px; }
+    color: #F7F3E3;
+    margin-top: 20px;
 }

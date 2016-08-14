@@ -1,5 +1,29 @@
 {% extends "layout.twig" %}
 
 {% block body %}
-    <h1>Contact Page!</h1>
+<div class="page-content">
+    <h1>Contact Us</h1>
+    
+    <span><p>Please feel free to send us any questions or enquiries you might have using the form below:</p></span>
+    <form action="mailto:RPGConnectAdmin@gmail.com" method="post" class="basic-grey">
+        <label>
+            <span>Your Name :</span>
+            <input id="name" type="text" name="name" placeholder="Your Full Name" required/>
+        </label>
+       
+        <label>
+            <span>Your Email :</span>
+            <input id="email" type="email" name="email" placeholder="Valid Email Address" required/>
+        </label>
+       
+        <label>
+            <span>Message :</span>
+            <textarea id="message" name="message" placeholder="Your Message to Us" required></textarea>
+        </label>
+         <label>
+            <span>&nbsp;</span>
+            <input type="submit" class="button" value="Send" />
+        </label>    
+    </form
+</div>
 {% endblock %}

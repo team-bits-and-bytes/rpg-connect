@@ -274,7 +274,8 @@ class RoomController extends BaseController {
         $room->save();
         
         $room->members()->create([
-            'user_id' => $this->current_user()->id
+            'user_id' => $this->current_user()->id,
+            'favourite' => true
         ]);
         return $room;
     }

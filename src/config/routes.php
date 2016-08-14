@@ -30,6 +30,6 @@ $app->get('/rooms/{id}/download', 'Controllers\RoomController:download')->setNam
 
 // Misc
 $app->get('/about', 'Controllers\PageController:about')->setName('about');
-$app->get('/help', 'Controllers\PageController:help')->setName('help');
+$app->get('/help', 'Controllers\PageController:gameresources')->setName('gameresources');
 $app->get('/contact', 'Controllers\PageController:contact')->setName('contact');
 $app->get('/login', 'Controllers\PageController:login')->setName('login');

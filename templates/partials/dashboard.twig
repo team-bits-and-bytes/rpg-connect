@@ -6,6 +6,10 @@
         </div>
     </div>
     <div id="notebook-home">
+        <h2>Your notepad</h2>
+        <p>
+            Store useful game notes here:
+        </p>
          <form action="{{ path_for('create_note') }}" method="POST" id="notebook-form">
             <input type="hidden" name="csrf_name" value={{ csrf_name }}>
 	        <input type="hidden" name="csrf_value" value={{ csrf_value }}>

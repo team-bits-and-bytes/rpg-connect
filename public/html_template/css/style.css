@@ -3,6 +3,9 @@
    License: none (public domain)
 */
 
+/*messy css that needs to be fixed up*/
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -82,6 +85,10 @@ p{
 	width: 33.33%;
 }
 
+.thirdCol img{
+	height: 367px;
+}
+
 [class*='Col'] img{
 	width: 100%;
 }
@@ -98,12 +105,24 @@ p{
 	text-align: center;
 }
 
+.newfeaturespos{
+	position: absolute;
+	right: -6px;
+	top: 119px;
+	height: 500px;
+}
+
 .aligncenter {
 	text-align: center;
 }
 
+
 .alignleft {
 	text-align: left; 
+}
+
+.nobottommargin {
+margin-bottom: 0px !important;
 }
 
 .twothirdsCol{
@@ -118,6 +137,14 @@ p{
 	width: 25%;
 }
 
+.halfCol {
+	width: 50%;
+}
+
+.fourthCol h1{
+	clear:left;
+}
+
 .twothirdsCol {
 	text-align: center;
 	color: black;
@@ -125,6 +152,14 @@ p{
 
 .twofourthsCol{
 	width: 50%;
+}
+
+.fivesixthsCol{
+	width: 83.33%;
+}
+
+.sixthCol{
+	width: 16.66%;
 }
 
 	overflow-y: scroll;
@@ -149,6 +184,20 @@ body::-webkit-scrollbar-thumb {
 	width: 100%;
 }
 
+.oneCol h1{
+	text-align: left;
+	display:inline;
+}
+
+#saveexit	{
+	float:left;
+	width:50%;
+	position: absolute;
+	top:0;
+	right:0;
+}
+	
+	
 .grid:after {
   content: "";
   display: table;
@@ -193,6 +242,17 @@ body::-webkit-scrollbar-thumb {
 	text-align: center;
 }
 
+.inside-full{
+	background-color: #FFFFFF;
+	width: 100%;
+	border-radius: 10px;
+	padding: 1.5em;
+	text-align: center;
+	
+}
+
+
+
 #buttonwrap{
 	display: inline;
 	float: left;
@@ -203,22 +263,31 @@ body::-webkit-scrollbar-thumb {
 	height:60px;
 }
 
-#newfeatures{
+
+
+.newfeatures{
 	overflow-y: scroll;
-	height: 246px;
+	height: 422px;
 	padding-right: 20px;
 }
 
-#newfeatures::-webkit-scrollbar{
+#newfeaturesprofile{
+
+height:315px;
+}
+
+
+
+.newfeatures::-webkit-scrollbar{
 	width:1em;
 	background-color: #424B54;
 }
 
-#newfeatures::-webkit-scrollbar-track {
+.newfeatures::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-#newfeatures::-webkit-scrollbar-thumb {
+.newfeatures::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
@@ -227,6 +296,7 @@ body::-webkit-scrollbar-thumb {
 	overflow-y: scroll;
 	height: 246px;
 }
+
 	
 .twofourthsCol texarea::-webkit-scrollbar{
 	width:1em;
@@ -242,8 +312,120 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
+	
+
+#diceroller input[type=text]{
+	width: 100%;
+}
+
+#diceroller [class*='Col']:last-of-type {
+    padding-right: 20px;
+}
+
+#diceroller label {
+    width: 100%;
+    display: block;
+    margin: 5px 5px 5px 10px;
+    float: left;
+}
+
+#cleardicebtn {
+    padding: 14px;
+    margin: 5px 10px;
+    background-color: #E1CE7A;
+    width: 100%;
+}
+
+.dicerollerDice {
+background-color: #eff4f7;
+padding: 15px;
+border-radius: 5px;
+}
+
+.dicerollerTitle{
+}
+
+#chatroomdiv{
+	padding-right: 0px;
+	border-right:2px #E1CE7A;
+	position:relative;
+}
+
+#messagedisplay{
+	  margin-top: 20px;
+    height: 300px;
+}
+
+#chattext{
+margin-top: 20px;
+}
+
+.infotextarea{
+	background-color: #F7F3E3;
+	border: none;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	line-height: 1.3em;
+	padding: 20px;
+}
+
+#diceroller{
+	padding-right: 0px;
+	border-right:2px #E1CE7A;	
+}
+
+#dicerollerdiv{
+	height: 400px;
+	-webkit-transform:scale(0.7);
+	-moz-transform:scale(0.7);
+	-ms-transform:scale(0.7);
+	transform:scale(0.7);
+	position:relative;
+	bottom: 66px;
+}
+
+}
+
+.diceinput p{
+ float:left;
+ margin-right: 10px;
+}
+
+#chatroom {
+	height:380px;
+}
 
 
+
+#rollerborder{
+border: 2px solid #E1CE7A;
+border-top-right-radius: 0em;
+border-bottom-right-radius: 0em;
+height:483px;
+}
+
+#roomborder{
+border: 2px solid #E1CE7A;
+border-top-right-radius: 0em;
+border-bottom-right-radius: 0em;
+border-top-left-radius: 0em;
+border-bottom-left-radius: 0em;
+}
+
+#usersborder{
+border: 2px solid #E1CE7A;
+border-top-left-radius: 0em;
+border-bottom-left-radius: 0em;
+height: 483px;
+
+}
+
+
+
+
+#blurb {
+	width:798px;
+}
 
 /* HEADER */
 
@@ -283,7 +465,7 @@ padding: .2em 1em;
 }
 
 nav li a:hover {
-	color: #AF9164;
+	color: 	#7ae1ce;
 }
 
 header {
@@ -298,17 +480,13 @@ header {
 	top: 20px;
 }
 
-#logindiv {
+#registerdiv {
 	position: absolute;
 	right: 20px;
 	top: 20px;
 	text-align: right;
 }
 
-#loginbtnhome {
-	display: none;
-
-}
 
 button {
 		font-family: 'Roboto', sans-serif;
@@ -318,8 +496,12 @@ button {
     padding: 1em; 
 		border: none;
 		color: #F7F3E3;
+		
+}
 
-	
+button:hover{
+	background-color: #7ae1ce;
+	color: white;
 }
 
 .buttontwo{
@@ -332,6 +514,11 @@ button {
 	
 
 	
+}
+
+#userlist{
+
+	height:363px;
 }
 
 #largedice {
@@ -392,7 +579,7 @@ footer p {
   
 input[type=text], input[type=password] { width: 278px; }
 
-  p.loginrem {
+  p.loginrememember {
     float: left;
     line-height: 31px;
 
@@ -419,7 +606,7 @@ input {
 }
 
 input[type=text], input[type=password], input[type=date], input[type=email] {
-  margin: 5px;
+  margin: 10px;
   padding: 0 10px;
   width: 200px;
   height: 34px;
@@ -459,12 +646,3 @@ input[type=submit] {
 
 /* NOTEBOOK */ 
 
-.notebookTextarea {
-	  background-color: #F7F3E3;
-    border: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    line-height: 1.3em;
-    padding: 20px;
-    content: "Heya";
-}

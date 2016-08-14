@@ -3,73 +3,103 @@
 {% block head %}
     <script src="/assets/js/chat-room.js"></script>
     <script src="/assets/js/roll-dice.js"></script>
-    <style>
-        .messages {
-            width: 100%;
-            height: 100%;
-        }
-        
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 10px;
-        }
-        
-        .messages .new {
-            height: 50px;
-            width: 100%;
-        }
-        
-        .messages .new form {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .messages .new input {
-            height: 100%;
-            width: 89%;
-            padding-left: 10px;
-        }
-        
-        .messages .new button {
-            display: inline;
-            height: 100%;
-            width: 10%;
-            border-radius: 0;
-            margin: 0;
-        }
-        
-        .message {
-            padding-bottom: 10px;
-        }
-    </style>
+
 {% endblock %}
 
 {% block body %}
-    <div class="messages">
-        <ul>
-            {# messages added here by javascript #}
-        </ul>
-        
-        <div class="new">
-            <form>
-                <input type="hidden" name="csrf_name" value={{ csrf_name }}>
-                <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-                
-                <input type="hidden" name="user_id" value={{ currentUser.id }} />
-                <input type="hidden" name="user_name" value={{ currentUser.name }} />
-                <input type="text" name="message" placeholder="What's up..." />
-                <button type="submit">Send</button>
-            </form>
-        </div>
-        
-        <div class="dice">
-            <a href="#" data-num="6" data-die="6">Roll 6d6</a>
-            <a href="#" data-num="2" data-die="20">Roll 2d20</a>
-        </div>
-        
-        <div class="save">
-            <a href={{ path_for("room_save", { 'id': room.id }) }}>Save Log</a>
-        </div>
-    </div>
+<div class="page-content">
+<div class="fourthCol" id="diceroller">
+	<div class="inside" id="rollerborder">
+		<h2>Dice Roller</h2><br>
+		<div id="dicerollerdiv">
+			<div class="thirdCol">
+				<label class="dicerollerTitle">Amount</label>
+				<input type="text" name="d4a" value="">
+				<input type="text" name="d6a" value="">
+				<input type="text" name="d8a" value="">
+				<input type="text" name="d10a" value="">
+				<input type="text" name="d12a" value="">
+				<input type="text" name="d20a" value="">
+			</div>
+					
+			<div class="thirdCol">
+				<label class="dicerollerTitle">Type</label>
+				<label class="dicerollerDice">D4</label>
+				<label class="dicerollerDice">D6</label>
+				<label class="dicerollerDice">D8</label>
+				<label class="dicerollerDice">D10</label>
+				<label class="dicerollerDice">D12</label>
+				<label class="dicerollerDice">D20</label>
+			</div>
+					
+			<div class="thirdCol">
+				<label class="dicerollerTitle">Target</label>
+				<input type="text" name="d4t" value="">
+				<input type="text" name="d6t" value="">
+				<input type="text" name="d8t" value="">
+				<input type="text" name="d10t" value="">
+				<input type="text" name="d12t" value="">
+				<input type="text" name="d20t" value="">
+			</div>
+					
+			<div class="oneCol nobottommargin">
+				<label class="dicerollerTitle">Custom Dice</label>
+			</div>
+					
+			<div class="twothirdsCol">
+				<label class="dicerollerDice">Amount</label>
+				<label class="dicerollerDice">D[X]</label>
+				<label class="dicerollerDice">Target</label>
+				<button class="button" id="postdicebtn">Post Results</button>
+			</div>
+			
+			<div class="thirdCol">
+				<input type="text" name="dCa" value="">
+				<input type="text" name="dCn" value="">
+				<input type="text" name="dCt" value="">
+				<button class="button" id="cleardicebtn">Clear</button>		
+			</div>
+														
+			</div>
+		</div>
+	</div>
+				
+	<div class="twofourthsCol" id="chatroomdiv"><div class="inside" id="roomborder">
+		<h2 class="alignleft">{{ room.name }}</h1>
+		<div id="saveexit">
+			<a class="button"="savechat" href={{ path_for("room_save", { 'id': room.id }) }}>Save Chat Log to .TXT</a>
+			<a class="button" href={{ path_for('rooms') }}>Exit Chat</a>
+		</div>
+		<div id="chatroom">
+			<div class="alignleft">
+			<div id="messagedisplay" class="infotextarea">
+				<!-- messages displayed within the unordered list -->
+				<ul></ul>
+			</div>
+			</div>
+			<form>
+				<div class="fivesixthsCol" id="newmessage">
+	                <input type="hidden" name="csrf_name" value={{ csrf_name }}>
+	                <input type="hidden" name="csrf_value" value={{ csrf_value }}>
+	                <input type="hidden" name="user_id" value={{ currentUser.id }} />
+	                <input type="hidden" name="user_name" value={{ currentUser.name }} />
+					<textarea id="chattext" name="message" rows="3" columns="10" placeholder="What's Up...?"></textarea>
+				</div>
+				<div class="sixthCol">
+					<button class="button" type="submit">Send</button>
+				</div>
+			</form>
+				
+		</div>
+	</div></div>
+
+<!-- NYI		
+	<div class="fourthCol">
+		<div class="inside" id="usersborder">
+			<h3>Users in Room</h3>
+			<div id="userlist">
+			</div>
+		</div>
+	</div> 
+-->
 {% endblock %}

@@ -11,7 +11,7 @@ $(document).ready(function() {
                 $('input[name="avatar"]').val(evt.target.result);
                 // Update the avatar image to show newly selected one
                 $('#current_avatar').prop('src', evt.target.result);
-            }
+            };
             reader.readAsDataURL(input.files[0]);
         }
     });

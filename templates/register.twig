@@ -1,16 +1,21 @@
 {% extends "layout.twig" %}
 
 {% block body %}
-    <form action={{ path_for('create_user') }} method="POST">
+<div class="page-content">
+    <h1>Register</h1>
+    <span><p>TODO: Content</p></span>
+    
+    <form action={{ path_for('create_user') }} method="POST" class="basic-grey">
+        
         <input type="hidden" name="csrf_name" value={{ csrf_name }}>
         <input type="hidden" name="csrf_value" value={{ csrf_value }}>
-        
-        <input type="text" name="username" placeholder="Username">
-        <input type="email" name="email" placeholder="Email">
-        <input type="text" name="name" placeholder="Full Name">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="password_confirm" placeholder="Confirm Password">
-        
-        <button type="submit">Create account</button>
+                
+        <label><span>Username: </span><input type="text" name="username" placeholder="Username" required></label>
+        <label><span>Email: </span><input type="email" name="email" placeholder="Email" required></label>
+        <label><span>Full name: </span><input type="text" name="name" placeholder="Full Name" required></label>
+        <label><span>Password: </span><input type="password" name="password" placeholder="Password" required></label>
+        <label><span>Confirm Password: </span><input type="password" name="password_confirm" placeholder="Confirm Password" required></label><br/>
+        <button type="submit" class="button">Create account</button>
     </form>
+</div>
 {% endblock %}

@@ -10,19 +10,17 @@
 	
 	<header>
 	
-	  <div id="logo"><a href="index.html"/><img src="images/rpgcLogotype.png" height="60px" alt="dice"></div>
-	
-			<nav>		
-			    <ul>
-				<li><a href="index.html">Home</a></li>
-		  		<li><a href="about.html">About</a></li>
-		  		<li><a href="register.html">Register</a></li>
-		  		<li><a href="contact.html">Contact</a></li>
-		 		<li><a href="help.html">Help</a></li>
-				</ul>
-			</nav>
+  <div id="logo"><a href="index.html"/><img src="images/rpgcLogotype.png" height="60px" alt="dice"></div>
+	<nav>		
+		<ul>
+			<li><a href="index.html">Home</a></li>
+	  		<li><a href="about.html">About</a></li>
+	  		<li><a href="contact.html">Contact</a></li>
+	 		<li><a href="help.html">Help</a></li>
+	 	</ul>
+	</nav>
 		
-		<div id="logindiv"><button class="loginbtn">Login</button></div>
+	<div id="registerdiv"><form action="register.html"><button type="submit" name="registerbtn">Register</button></div>
 	
 	</header>
 
@@ -30,9 +28,9 @@
 
 	<main class="grid grid-pad">
 	
-		<div class="thirdCol"><div class="hiddenCol"></div></div>
+	<div class="thirdCol"><div class="hiddenCol"></div></div>
 		<div class="thirdCol"><div class="inside">
-		<div class="register">
+			<div class="register">
       <h1>Register your RPG Connect Account</h1><br>
       <form name= "register" method="post" action="index.html">
       	<p>Username:</p>
@@ -50,13 +48,13 @@
 				<p>Confirm Password:</p>
 				<p><input name="conpassword" type="password" placeholder="Confirm Password" required></p><br>
         <p class="remember_me">
-          <label>
-            <input type="checkbox" name="registerrem" id="remember_me"><br>
-            Remember me on this computer
-          </label>
+        <label>
+        <input type="checkbox" name="registerrem" id="remember_me"><br>
+        Remember me on this computer
+        </label>
         </p>
-        <p class="submit"><input type="submit" name="register" value="Register"></p><br>
-      </form>
+				<button class="regnewuserbtn">Register</button>
+        </form>
     </div></div></div>
 		<div class="thirdCol"><div class="hiddenCol"></div></div>
 		

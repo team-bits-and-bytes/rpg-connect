@@ -5,21 +5,32 @@
 {% endblock %}
 
 {% block body %}
+<div class="page-content">
     <h1>Rooms Found</h1>
-    <ul>
+    <ul id="search-list">
+        
+        <!-- Search list bugged, cant maintain list inside of parent div (might be 
+        rendered after CSS is applied? -->
         {% for room in rooms %}
-            <li>
-                Name: {{room.name}}
+            <li style="text-align:center; display: block;">
                 <br>
                 {% if not room.is_member %}
-                    <form id="join_room" action="{{ path_for("join_room", { 'id': room.id }) }}" method="POST" data-private={{ room.private }}>
+                    <form class="basic-grey" id="join_room" action="{{ path_for("join_room", { 'id': room.id }) }}" method="POST" data-private={{ room.private }}>
+                        <label><span>Name: {{room.name}}</span></label><br/>
                         <input type="hidden" name="csrf_name" value={{ csrf_name }}>
                         <input type="hidden" name="csrf_value" value={{ csrf_value }}>
                         <input type="hidden" name="password">
-                        <button type="submit">Join</button>
+                        <button class="button" type="submit">Join</button>
+                    </form>
+                {% else %}
+                    <form class="basic-grey" id="join_room" action={{ path_for("room", { 'id': room.id }) }} method="GET" data-private={{ room.private }}>
+                        <label><span>Name: {{room.name}}</span></label><br/>
+                        <button class="button"  type="submit">Open</button>
                     </form>
                 {% endif %}
             </li>
         {% endfor %}
     </ul>
+    <div class="spacer" style="clear: both;"></div>
+</div>
 {% endblock %}

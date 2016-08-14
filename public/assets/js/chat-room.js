@@ -10,13 +10,13 @@ $(document).ready(function() {
             return;
         }
         
-        var $ul = $('.messages > ul');
+        var $ul = $('#messagedisplay > ul');
         var $li = $('<li/>');
         
         var $user = $('<span class="user"/>');
         $user.append(data.from.name);
         
-        var $message = $('<p/>')
+        var $message = $('<p/>');
         $message.append(data.message);
         
         var $div = $('<div class="message" data-message-id="' + data.message_id + '"' + '/>');
@@ -25,10 +25,10 @@ $(document).ready(function() {
         
         $li.append($div);
         $ul.append($li);
-    }
+    };
     
     // send messages upstream
-    var sendMessage = function(data) {
+    var sendMessage = function(data, callback) {
         var url = window.location.pathname + '/message';
         var csrf_name = $('input[name="csrf_name"]').val();
         var csrf_value = $('input[name="csrf_value"]').val();
@@ -44,8 +44,11 @@ $(document).ready(function() {
             // update CSRF values
             $('input[name="csrf_name"]').val(response.name);
             $('input[name="csrf_value"]').val(response.value);
+            if (callback !== undefined && typeof callback === 'function') {
+                callback();
+            }
         });
-    }
+    };
     
     var getMessages = function(callback) {
         var url = window.location.pathname + '/messages';
@@ -64,19 +67,22 @@ $(document).ready(function() {
                createMessage(message);
             });
             
+            // scroll to bottom
+            $('#messagedisplay').scrollTop($('#messagedisplay').prop('scrollHeight'));
+            
             // execute callback if it exists!
-            if (callback !== undefined || callback !== null) {
+            if ((callback !== undefined || callback !== null) && typeof callback === 'function') {
                 callback();
             }
         });
-    }
+    };
    
     // sending a new message
-    $('.messages .new form').on('submit', function(e) {
+    $('#chatroom form').on('submit', function(e) {
         e.preventDefault();
         
         // get value from input element
-        var value = $(this).find('input[type="text"]')[0].value;
+        var value = $(this).find('#chattext')[0].value;
         if (value === '') {
           return;
         }
@@ -88,7 +94,7 @@ $(document).ready(function() {
         sendMessage(data);
         
         // reset the input
-        $(this).find('input[type="text"]')[0].value = '';
+        $(this).find('#chattext')[0].value = '';
     });
     
     // request old messages instantly
