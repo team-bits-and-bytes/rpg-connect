@@ -281,6 +281,12 @@ class RoomController extends BaseController {
     }
     
     private function validate($params) {
+        if (empty($params['name'])) {
+            $this->is_invalid = true;
+            $this->validation_error = 'You must enter a name.';
+            return false;
+        }
+    
         // unique constraint on name
         $count = Room::where('name', $params['name'])->count();
         if ($count != 0) {

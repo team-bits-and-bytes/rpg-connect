@@ -53,6 +53,6 @@ class UserController extends BaseController {
         }
         
         $this->flash->addMessage('success', 'Your account has been updated!');
-        return $response->withRedirect($this->ci->get('router')->pathFor('root'));
+        return $response->withRedirect($this->ci->get('router')->pathFor('user'));
     }
 }
