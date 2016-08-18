@@ -16,7 +16,13 @@
 - Routes: `src/config/routes.php`
 - Migrations: `src/db/migrations/`
 
-### Database
+### Simple Setup
+
+Run the setup script `setup.sh`.
+
+### Advanced Setup
+
+#### Database
 
 Run MySQL with: `mysql-ctl start`
 
@@ -28,15 +34,15 @@ You can rollback changes made by running the following:
 
 `php tasks.php rollback`
 
-### Redis
+#### Redis (Chat)
 
 Run Redis with: `sudo service redis-server start`
 
 ## Open Source Frameworks
 
-- [Slim](http://www.slimframework.com/)
-- [Eloquent](https://laravel.com/docs/5.2/eloquent)
-- [jQuery](https://jquery.com/)
+- [Slim](http://www.slimframework.com/) - [MIT License](https://github.com/slimphp/Slim/blob/3.x/LICENSE.md)
+- [Eloquent](https://laravel.com/docs/5.2/eloquent) - [MIT License](https://github.com/laravel/framework/blob/5.2/LICENSE.txt)
+- [jQuery](https://jquery.com/) - [MIT License](https://github.com/jquery/jquery/blob/master/LICENSE.txt)
 
 ## Links
 
