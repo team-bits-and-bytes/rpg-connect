@@ -57,15 +57,13 @@ $(document).ready(function() {
             url: url,
             data: { 'message_id': LAST_MESSAGE_ID }
         }).done(function(response) {
-            if (response.length === 0) {
-                return;
+            if (response.length !== 0) {
+                // get last message in response array and update LAST_MESSAGE_ID
+                LAST_MESSAGE_ID = response[response.length - 1]['message_id'];
+                $.each(response, function(_, message) {
+                   createMessage(message);
+                });
             }
-            
-            // get last message in response array and update LAST_MESSAGE_ID
-            LAST_MESSAGE_ID = response[response.length - 1]['message_id'];
-            $.each(response, function(_, message) {
-               createMessage(message);
-            });
             
             // scroll to bottom
             $('#messagedisplay').scrollTop($('#messagedisplay').prop('scrollHeight'));
@@ -102,7 +100,7 @@ $(document).ready(function() {
         // constantly request new info from the server!
         setInterval(function() {
             getMessages();
-        }, 2000); // every 2s
+        }, 500); // every 2s
     });
     
     // expose `sendMessage` as a global so other JavaScript files may use it
